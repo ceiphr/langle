@@ -25,6 +25,38 @@ a {
     margin-top: 5px;
 }
 
+.key {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    min-width: 40px;
+    padding: 20px;
+    border: 2px solid #ccc;
+}
+
+.keyboard-row1 {
+    margin-top: 2rem;
+    margin-bottom: 5px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-gap: 5px;
+}
+
+.keyboard-row2 {
+    display: grid;
+    margin-bottom: 5px;
+    grid-template-columns: repeat(11, 1fr);
+    grid-gap: 5px;
+}
+
+.keyboard-row3 {
+    display: grid;
+    margin-bottom: 5px;
+    grid-template-columns: repeat(9, 1fr);
+    grid-gap: 5px;
+}
+
 .letter {
     display: flex;
     justify-content: center;
@@ -41,6 +73,10 @@ a {
     line-height: normal;
     font-weight: bold;
     font-size: 2em;
+}
+
+.blank {
+    border: none;
 }
 
 .reveal .letter-green {

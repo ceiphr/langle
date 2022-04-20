@@ -17,7 +17,7 @@ const Letter = ({ letter, type }) => {
 
 const WordGrid = ({ word, board, guess }) => {
     return (
-        <div className="grid">
+        <>
             {board.map((row, i) => (
                 <div key={i} className={i < guess ? "row reveal" :"row"}>
                     {row.map((letter, j) => {
@@ -35,7 +35,7 @@ const WordGrid = ({ word, board, guess }) => {
                     })}
                 </div>
             ))}
-        </div>
+        </>
     );
 };
 

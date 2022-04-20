@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import WordGrid from "../components/WordGrid";
+import Keyboard from "../components/Keyboard";
 import styles from "../styles/Home.module.css";
 
 const answerWord = "llamo".toUpperCase();
@@ -19,6 +20,15 @@ export default function Home() {
         allowedLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
     const addLetter = (input) => {
+        if (input === "DELETE") {
+            removeLetter();
+            return;
+        }
+        else if (input === "ENTER") {
+            guessWord();
+            return;
+        }
+
         if (position < 5 && guess < 4) {
             let newBoard = JSON.parse(JSON.stringify(board));
             newBoard[guess][position] = input.toUpperCase();
@@ -75,6 +85,7 @@ export default function Home() {
             <main className={styles.main}>
                 <h1 className={styles.title}>Hola, me _____ es Gregg.</h1>
                 <WordGrid word={answerWord} board={board} guess={guess} />
+                <Keyboard word={answerWord} board={board} addLetter={addLetter} removeLetter={removeLetter} guessWord={guessWord} />
             </main>
         </div>
     );
