@@ -14,3 +14,32 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 5px;
+}
+
+.row:not(:first-child) {
+  margin-top: 5px;
+}
+
+.letter {
+  text-align: center;
+  font-weight: bold;
+  padding: 20px;
+  border: 5px solid #ccc;
+}
+
+.letter-green {
+  background-color: #00ff00;
+}
+
+.letter-yellow {
+  background-color: #ffff00;
+}
+
+.letter-gray {
+  background-color: #cccccc;
+}
