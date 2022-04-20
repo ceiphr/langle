@@ -3,28 +3,64 @@ import Head from "next/head";
 import WordGrid from "../components/WordGrid";
 import styles from "../styles/Home.module.css";
 
+const answerWord = "llamo".toUpperCase();
+
+const defaultGameState = {
+    win: false,
+    lose: false
+}
+
 export default function Home() {
-    const [guessedWord, setGuessedWord] = useState([]),
+    const m = 4, n = 5,
+        [gameState, setGameState] = useState(defaultGameState),
+        [board, setBoard] = useState(Array(m).fill(0).map(() => new Array(n).fill(""))),
+        [position, setPosition] = useState(0),
+        [guess, setGuess] = useState(0),
         allowedLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+    const addLetter = (input) => {
+        if (position < 5 && guess < 4) {
+            let newBoard = JSON.parse(JSON.stringify(board));
+            newBoard[guess][position] = input.toUpperCase();
+            console.log(input, position, guess, board);
+            setBoard(newBoard);
+            setPosition(position + 1);
+        }
+    };
+
+    const removeLetter = () => {
+        if (position > 0 && guess < 4) {
+            let newBoard = [...board];
+            newBoard[guess][position - 1] = "";
+            setBoard(newBoard);
+            setPosition(position - 1);
+        }
+    };
+
+    const guessWord = () => {
+        if (position === 5 && guess < 4) {
+            console.log(board[guess].join(""));
+            if (board[guess].join("") === answerWord)
+                setGameState({ ...gameState, win: true });
+            setPosition(0);
+            setGuess(guess + 1);
+        }
+        if (guess === 4)
+            setGameState({ ...gameState, lose: true });
+    };
 
     useEffect(() => {
         document.addEventListener("keydown", function (event) {
-            // let tempWord = [...guessedWord];
-            // if(guessedWord.length < 5 && allowedLetters.includes(event.key.toUpperCase())) {
-            //   tempWord.push(event.key.toUpperCase());
-            //   setGuessedWord(tempWord);
-            // }
-            // if(guessedWord.length > 0 && event.key === "Delete") {
-            //   tempWord.pop();
-            //   setGuessedWord(tempWord);
-            // }
-            console.log(event.key);
+            if (gameState.win || gameState.lose)
+                return;
+            if (allowedLetters.includes(event.key.toUpperCase()))
+                addLetter(event.key.toUpperCase());
+            if (event.key === "Delete")
+                removeLetter();
+            if (event.key === "Enter")
+                guessWord();
         });
     });
-
-    useEffect(() => {
-      console.log(guessedWord);
-    }, [guessedWord]);
 
     return (
         <div className={styles.container}>
@@ -36,11 +72,9 @@ export default function Home() {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-
             <main className={styles.main}>
-                <h1 className={styles.title}>Hola, me llamo es Gregg.</h1>
-                <p>{guessedWord.join('')}</p>
-                <WordGrid word={guessedWord} />
+                <h1 className={styles.title}>Hola, me _____ es Gregg.</h1>
+                <WordGrid word={answerWord} board={board} guess={guess} />
             </main>
         </div>
     );

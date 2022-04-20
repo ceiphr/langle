@@ -1,45 +1,40 @@
 import React from 'react';
 
-const Letter = () => {
+// Enum for letter types
+const LetterType = {
+    Correct: 'letter-green',
+    InWord: 'letter-yellow',
+    Incorrect: 'letter-gray'
+}
+
+const Letter = ({ letter, type }) => {
     return (
-        <div className="letter">
-           A 
+        <div className={"letter ".concat(type)}>
+            <span>{letter}</span>
         </div>
     );
 };
 
-const WordGrid = ({ word }) => {
-
+const WordGrid = ({ word, board, guess }) => {
     return (
         <div className="grid">
-            <div className="row">
-                <Letter/>
-                <Letter/>
-                <Letter/>
-                <Letter/>
-                <Letter/>
-            </div>
-            <div className="row">
-                <Letter/>
-                <Letter/>
-                <Letter/>
-                <Letter/>
-                <Letter/>
-            </div>
-            <div className="row">
-                <Letter/>
-                <Letter/>
-                <Letter/>
-                <Letter/>
-                <Letter/>
-            </div>
-            <div className="row">
-                <Letter/>
-                <Letter/>
-                <Letter/>
-                <Letter/>
-                <Letter/>
-            </div>
+            {board.map((row, i) => (
+                <div key={i} className={i < guess ? "row reveal" :"row"}>
+                    {row.map((letter, j) => {
+                        let type = "";
+                        if (word[j] === letter)
+                            type = LetterType.Correct;
+                        else if (letter !== "" && word.includes(letter))
+                            type = LetterType.InWord;
+                        else if (letter === "")
+                            type = "";
+                        else
+                            type = LetterType.Incorrect;
+
+                        return <Letter key={`${i}${j}`} type={type} letter={letter} />
+                    })}
+                </div>
+            ))}
         </div>
     );
 };

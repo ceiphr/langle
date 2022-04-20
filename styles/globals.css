@@ -1,45 +1,56 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .row {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 5px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 5px;
 }
 
 .row:not(:first-child) {
-  margin-top: 5px;
+    margin-top: 5px;
 }
 
 .letter {
-  text-align: center;
-  font-weight: bold;
-  padding: 20px;
-  border: 5px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+    width: 75px;
+    padding: 20px;
+    border: 5px solid #ccc;
 }
 
-.letter-green {
-  background-color: #00ff00;
+.letter span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    font-weight: bold;
+    font-size: 2em;
 }
 
-.letter-yellow {
-  background-color: #ffff00;
+.reveal .letter-green {
+    background-color: #00ff00;
 }
 
-.letter-gray {
-  background-color: #cccccc;
+.reveal .letter-yellow {
+    background-color: #ffff00;
+}
+
+.reveal .letter-gray {
+    background-color: #cccccc;
 }
