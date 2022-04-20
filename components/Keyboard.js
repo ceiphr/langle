@@ -8,13 +8,16 @@ const LetterType = {
     Hidden: 'blank'
 }
 
-const Key = ({ letterKey, word, board, onClick }) => {
+const Key = ({ letterKey, word, guess, board, onClick }) => {
     let type = "";
 
     if (letterKey === "")
         type = LetterType.Hidden;
     else
-        board.map((row) => {
+        board.map((row, i) => {
+            if (i >= guess)
+                return;
+
             row.map((letter, j) => {
                 if (letter !== letterKey)
                     return;
@@ -34,7 +37,7 @@ const Key = ({ letterKey, word, board, onClick }) => {
     );
 }
 
-const Keyboard = ({ board, word, addLetter, removeLetter, guessWord }) => {
+const Keyboard = ({ board, word, guess, addLetter }) => {
     const row1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
         row2 = ["", "A", "S", "D", "F", "G", "H", "J", "K", "L", ""],
         row3 = ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "DELETE"];
@@ -42,13 +45,13 @@ const Keyboard = ({ board, word, addLetter, removeLetter, guessWord }) => {
     return (
         <div className="reveal">
             <div className="keyboard-row1">
-                {row1.map((letter, i) => <Key key={i} letterKey={letter} board={board} word={word} onClick={() => addLetter(letter)} />)}
+                {row1.map((letter, i) => <Key key={i} letterKey={letter} guess={guess} board={board} word={word} onClick={() => addLetter(letter)} />)}
             </div>
             <div className="keyboard-row2">
-                {row2.map((letter, i) => <Key key={i} letterKey={letter} board={board} word={word} onClick={() => addLetter(letter)} />)}
+                {row2.map((letter, i) => <Key key={i} letterKey={letter} guess={guess} board={board} word={word} onClick={() => addLetter(letter)} />)}
             </div>
             <div className="keyboard-row3">
-                {row3.map((letter, i) => <Key key={i} letterKey={letter} board={board} word={word} onClick={() => addLetter(letter)} />)}
+                {row3.map((letter, i) => <Key key={i} letterKey={letter} guess={guess} board={board} word={word} onClick={() => addLetter(letter)} />)}
             </div>
         </div>
     );
