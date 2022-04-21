@@ -77,7 +77,9 @@ export default function Home() {
     };
 
     useEffect(() => {
-        document.getElementById("word-input").focus();
+        setInterval(function () {
+            document.getElementById("word-input").focus();
+        }, 10);
     });
 
     return (
