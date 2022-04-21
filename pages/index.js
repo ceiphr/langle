@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from 'react-modal';
 import Head from "next/head";
 import WordGrid from "../components/WordGrid";
@@ -18,8 +18,8 @@ export default function Home() {
         [gameState, setGameState] = useState(defaultGameState),
         [endModalIsOpen, setEndModalIsOpen] = useState(false),
         [position, setPosition] = useState(0),
-        [guess, setGuess] = useState(0);
-    // allowedLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+        [guess, setGuess] = useState(0),
+        allowedLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
     const closeEndModal = () => {
         setEndModalIsOpen(false);
@@ -70,18 +70,20 @@ export default function Home() {
         }
     };
 
-    // useEffect(() => {
-    //     document.addEventListener("keydown", function (event) {
-    //         if (gameState.win || gameState.lose)
-    //             return;
-    //         if (allowedLetters.includes(event.key.toUpperCase()))
-    //             addLetter(event.key.toUpperCase());
-    //         if (event.key === "Delete")
-    //             removeLetter();
-    //         if (event.key === "Enter")
-    //             guessWord();
-    //     });
-    // });
+    function handleKeyDown(event) {
+        if (gameState.win || gameState.lose)
+            return;
+        if (allowedLetters.includes(event.key.toUpperCase()))
+            addLetter(event.key.toUpperCase());
+        if (event.key === "Delete" || event.key === "Backspace")
+            removeLetter();
+        if (event.key === "Enter")
+            guessWord();
+    };
+
+    useEffect(() => {
+        document.getElementById("word-input").focus();
+    }, []);
 
     return (
         <div className={styles.container}>
@@ -106,6 +108,12 @@ export default function Home() {
                 <button onClick={closeEndModal}>close</button>
                 <h1>You {gameState.win ? "win" : "lose"}!</h1>
             </Modal>
+            <input
+                id="word-input"
+                onKeyDown={handleKeyDown}
+                type="text"
+                className="hidden-input"
+            />
         </div>
     );
 }

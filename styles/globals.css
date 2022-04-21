@@ -25,6 +25,16 @@ a {
     margin-top: 5px;
 }
 
+.hidden-input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
 .key {
     cursor: pointer;
     display: flex;
