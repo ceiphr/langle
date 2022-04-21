@@ -7,15 +7,10 @@ import styles from "../styles/Home.module.css";
 
 const answerWord = "llamo".toUpperCase();
 
-const defaultGameState = {
-    win: false,
-    lose: false
-}
-
 export default function Home() {
     const m = 4, n = 5,
         [board, setBoard] = useState(Array(m).fill(0).map(() => new Array(n).fill(""))),
-        [gameState, setGameState] = useState(defaultGameState),
+        [gameState, setGameState] = useState(null),
         [endModalIsOpen, setEndModalIsOpen] = useState(false),
         [position, setPosition] = useState(0),
         [guess, setGuess] = useState(0),
@@ -34,7 +29,7 @@ export default function Home() {
             guessWord();
             return;
         }
-        else if (gameState.lose || gameState.win) {
+        else if (gameState !== null) {
             return;
         }
 
@@ -58,20 +53,20 @@ export default function Home() {
     const guessWord = () => {
         if (position === 5 && guess < 4) {
             if (board[guess].join("") === answerWord) {
-                setGameState({ ...gameState, win: true });
+                setGameState(true);
                 setEndModalIsOpen(true);
             }
             setPosition(0);
             setGuess(guess + 1);
         }
-        if (guess === 4) {
-            setGameState({ ...gameState, lose: true });
+        if (guess === 3) {
+            setGameState(false);
             setEndModalIsOpen(true);
         }
     };
 
     function handleKeyDown(event) {
-        if (gameState.win || gameState.lose)
+        if (gameState !== null)
             return;
         if (allowedLetters.includes(event.key.toUpperCase()))
             addLetter(event.key.toUpperCase());
@@ -83,7 +78,7 @@ export default function Home() {
 
     useEffect(() => {
         document.getElementById("word-input").focus();
-    }, []);
+    });
 
     return (
         <div className={styles.container}>
@@ -103,10 +98,11 @@ export default function Home() {
             <Modal
                 isOpen={endModalIsOpen}
                 onRequestClose={closeEndModal}
-                contentLabel="Example Modal"
+                ariaHideApp={false}
+                contentLabel="Selected Option"
             >
-                <button onClick={closeEndModal}>close</button>
-                <h1>You {gameState.win ? "win" : "lose"}!</h1>
+                <div className="modal-close" onClick={closeEndModal}>X</div>
+                <h1 className="end-title">You {gameState ? "win" : "lose"}!</h1>
             </Modal>
             <input
                 id="word-input"

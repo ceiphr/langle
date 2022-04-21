@@ -68,6 +68,20 @@ a {
     grid-gap: 5px;
 }
 
+.end-title {
+    text-align: center;
+    font-size: 4rem;
+}
+
+.modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 2rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+
 .letter {
     display: flex;
     justify-content: center;
