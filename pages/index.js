@@ -51,16 +51,20 @@ export default function Home() {
     };
 
     const guessWord = () => {
-        if (position === 5 && guess < 4) {
+        if (position === 5 && guess < 3) {
+            setGuess(guess + 1);
             if (board[guess].join("") === answerWord) {
                 setGameState(true);
                 setEndModalIsOpen(true);
             }
             setPosition(0);
-            setGuess(guess + 1);
         }
-        if (guess === 3) {
-            setGameState(false);
+        else if (position === 5 && guess === 3) {
+            setGuess(guess + 1);
+            if (board[guess].join("") === answerWord)
+                setGameState(true);
+            else
+                setGameState(false);
             setEndModalIsOpen(true);
         }
     };
