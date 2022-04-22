@@ -97,7 +97,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.main}>
-                <h1 className={styles.title}>Hola, me _____ es Gregg.</h1>
+                <h1 className={styles.title}>Hola, me _____ Gregg.</h1>
                 <WordGrid word={answerWord} board={board} guess={guess} />
                 <Keyboard word={answerWord} board={board} addLetter={addLetter} guess={guess} />
             </main>
