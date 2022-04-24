@@ -1,9 +1,17 @@
+/* General Styles */
+
 html,
 body {
     padding: 0;
     margin: 0;
+    overflow: hidden;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
         Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
 }
 
 a {
@@ -15,103 +23,22 @@ a {
     box-sizing: border-box;
 }
 
-.row {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 5px;
+/* Color styles */
+
+.green,
+.yellow,
+.gray {
+    color: white;
 }
 
-.row:not(:first-child) {
-    margin-top: 5px;
+.green {
+    background-color: #6aaa64;
 }
 
-.hidden-input {
-    position: absolute;
-    width: 0;
-    height: 0;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    pointer-events: none;
+.yellow {
+    background-color: #c9b458;
 }
 
-.key {
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    min-width: 40px;
-    padding: 20px;
-    border: 2px solid #ccc;
-}
-
-.keyboard-row1 {
-    margin-top: 2rem;
-    margin-bottom: 5px;
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-gap: 5px;
-}
-
-.keyboard-row2 {
-    display: grid;
-    margin-bottom: 5px;
-    grid-template-columns: repeat(11, 1fr);
-    grid-gap: 5px;
-}
-
-.keyboard-row3 {
-    display: grid;
-    margin-bottom: 5px;
-    grid-template-columns: repeat(9, 1fr);
-    grid-gap: 5px;
-}
-
-.end-title {
-    text-align: center;
-    font-size: 4rem;
-}
-
-.modal-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 2rem;
-    padding: 1rem;
-    cursor: pointer;
-}
-
-.letter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 75px;
-    width: 75px;
-    padding: 20px;
-    border: 5px solid #ccc;
-}
-
-.letter span {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
-    font-weight: bold;
-    font-size: 2em;
-}
-
-.blank {
-    border: none;
-}
-
-.reveal .letter-green {
-    background-color: #00ff00;
-}
-
-.reveal .letter-yellow {
-    background-color: #ffff00;
-}
-
-.reveal .letter-gray {
-    background-color: #cccccc;
+.gray {
+    background-color: #86888a;
 }

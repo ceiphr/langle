@@ -1,26 +1,28 @@
 import { useState, useEffect } from "react";
-import Modal from 'react-modal';
 import Head from "next/head";
 import WordGrid from "../components/WordGrid";
 import Keyboard from "../components/Keyboard";
+import EndModal from "../components/EndModal";
 import styles from "../styles/Home.module.css";
 
 const answerWord = "llamo".toUpperCase();
 
 export default function Home() {
-    const m = 4, n = 5,
-        [board, setBoard] = useState(Array(m).fill(0).map(() => new Array(n).fill(""))),
-        [gameState, setGameState] = useState(null),
+    const allowedLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+    // Consts to generate board state
+    const rowSize = 3, colSize = 5,
+        [board, setBoard] = useState(Array(rowSize).fill(0).map(() => new Array(colSize).fill("")))
+
+    // Consts used for managing game state and input state
+    const [gameState, setGameState] = useState(null),
         [endModalIsOpen, setEndModalIsOpen] = useState(false),
         [position, setPosition] = useState(0),
-        [guess, setGuess] = useState(0),
-        allowedLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+        [guess, setGuess] = useState(0)
 
-    const closeEndModal = () => {
-        setEndModalIsOpen(false);
-    }
-
-    const addLetter = (input) => {
+    // Handles the input from the virtual or physical keyboard
+    // and updates the position and board state
+    const takeInput = (input) => {
         if (input === "DELETE") {
             removeLetter();
             return;
@@ -29,11 +31,11 @@ export default function Home() {
             guessWord();
             return;
         }
-        else if (gameState !== null) {
+        else if (gameState !== null)
             return;
-        }
 
-        if (position < 5 && guess < 4) {
+
+        if (position < colSize && guess < rowSize) {
             let newBoard = JSON.parse(JSON.stringify(board));
             newBoard[guess][position] = input.toUpperCase();
             setBoard(newBoard);
@@ -41,8 +43,10 @@ export default function Home() {
         }
     };
 
+    // Removes the last letter from the board
+    // and updates the position and board state
     const removeLetter = () => {
-        if (position > 0 && guess < 4) {
+        if (position > 0 && guess < rowSize) {
             let newBoard = [...board];
             newBoard[guess][position - 1] = "";
             setBoard(newBoard);
@@ -50,8 +54,12 @@ export default function Home() {
         }
     };
 
+    // Guesses the word and updates the guess, position and game state
     const guessWord = () => {
-        if (position === 5 && guess < 3) {
+        if (guess === rowSize)
+            return;
+
+        if (position === colSize && guess < rowSize - 1) {
             setGuess(guess + 1);
             if (board[guess].join("") === answerWord) {
                 setGameState(true);
@@ -59,7 +67,7 @@ export default function Home() {
             }
             setPosition(0);
         }
-        else if (position === 5 && guess === 3) {
+        else if (position === colSize && guess === rowSize - 1) {
             setGuess(guess + 1);
             if (board[guess].join("") === answerWord)
                 setGameState(true);
@@ -69,21 +77,24 @@ export default function Home() {
         }
     };
 
-    function handleKeyDown(event) {
+    // Handles the physical keyboard input
+    const handleKeyDown = (event) => {
         if (gameState !== null)
             return;
         if (allowedLetters.includes(event.key.toUpperCase()))
-            addLetter(event.key.toUpperCase());
+            takeInput(event.key.toUpperCase());
         if (event.key === "Delete" || event.key === "Backspace")
             removeLetter();
         if (event.key === "Enter")
             guessWord();
     };
 
+    // Hack for taking input from the physical keyboard
     useEffect(() => {
-        setInterval(function () {
-            document.getElementById("word-input").focus();
-        }, 10);
+        if (gameState === null)
+            setInterval(function () {
+                document.getElementById("word-input").focus();
+            }, 10);
     });
 
     return (
@@ -99,23 +110,16 @@ export default function Home() {
             <main className={styles.main}>
                 <h1 className={styles.title}>Hola, me _____ es Gregg.</h1>
                 <WordGrid word={answerWord} board={board} guess={guess} />
-                <Keyboard word={answerWord} board={board} addLetter={addLetter} guess={guess} />
+                <Keyboard word={answerWord} board={board} takeInput={takeInput} guess={guess} />
             </main>
-            <Modal
-                isOpen={endModalIsOpen}
-                onRequestClose={closeEndModal}
-                ariaHideApp={false}
-                contentLabel="Selected Option"
-            >
-                <div className="modal-close" onClick={closeEndModal}>X</div>
-                <h1 className="end-title">You {gameState ? "win" : "lose"}!</h1>
-            </Modal>
+            <EndModal isOpen={endModalIsOpen} setIsOpen={setEndModalIsOpen} gameState={gameState} />
+            {/* Hidden input used to take input from physical keyboard */}
             <input
                 id="word-input"
                 onKeyDown={handleKeyDown}
                 type="text"
-                className="hidden-input"
+                className={styles.hiddenInput}
             />
-        </div>
+        </div >
     );
 }

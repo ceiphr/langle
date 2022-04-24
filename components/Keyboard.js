@@ -1,12 +1,6 @@
 import React from 'react';
-
-// Enum for letter types
-const LetterType = {
-    Correct: 'letter-green',
-    InWord: 'letter-yellow',
-    Incorrect: 'letter-gray',
-    Hidden: 'blank'
-}
+import { LetterType } from '../data/enums';
+import styles from '../styles/Keyboard.module.css';
 
 const Key = ({ letterKey, word, guess, board, onClick }) => {
     let type = "";
@@ -31,27 +25,27 @@ const Key = ({ letterKey, word, guess, board, onClick }) => {
         });
 
     return (
-        <div className={"key ".concat(type)} onClick={onClick}>
+        <div className={styles.key.concat(` ${type}`)} onClick={onClick}>
             <span>{letterKey}</span>
         </div>
     );
 }
 
-const Keyboard = ({ board, word, guess, addLetter }) => {
+const Keyboard = ({ board, word, guess, takeInput }) => {
     const row1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-        row2 = ["", "A", "S", "D", "F", "G", "H", "J", "K", "L", ""],
+        row2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
         row3 = ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "DELETE"];
 
     return (
-        <div className="reveal">
-            <div className="keyboard-row1">
-                {row1.map((letter, i) => <Key key={i} letterKey={letter} guess={guess} board={board} word={word} onClick={() => addLetter(letter)} />)}
+        <div className={styles.keyboard}>
+            <div className={styles.keyboardRow}>
+                {row1.map((letter, i) => <Key key={i} letterKey={letter} guess={guess} board={board} word={word} onClick={() => takeInput(letter)} />)}
             </div>
-            <div className="keyboard-row2">
-                {row2.map((letter, i) => <Key key={i} letterKey={letter} guess={guess} board={board} word={word} onClick={() => addLetter(letter)} />)}
+            <div className={styles.keyboardRow}>
+                {row2.map((letter, i) => <Key key={i} letterKey={letter} guess={guess} board={board} word={word} onClick={() => takeInput(letter)} />)}
             </div>
-            <div className="keyboard-row3">
-                {row3.map((letter, i) => <Key key={i} letterKey={letter} guess={guess} board={board} word={word} onClick={() => addLetter(letter)} />)}
+            <div className={styles.keyboardRow}>
+                {row3.map((letter, i) => <Key key={i} letterKey={letter} guess={guess} board={board} word={word} onClick={() => takeInput(letter)} />)}
             </div>
         </div>
     );
