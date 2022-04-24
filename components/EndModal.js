@@ -9,7 +9,7 @@ const EndModal = ({ isOpen, setIsOpen, gameState }) => {
         >
             <h1>You {gameState ? "win" : "lose"}!</h1>
             <h2>Survey</h2>
-            <form name="contact" netlify="true">
+            <form name="contact" method="post">
                 <TextInput
                     required
                     label="Name"
@@ -17,7 +17,7 @@ const EndModal = ({ isOpen, setIsOpen, gameState }) => {
                 />
                 <TextInput
                     required
-                    label="Stevens Email"
+                    label="Email"
                     placeholder="mamaj@stevens.edu"
                 />
                 <Checkbox
