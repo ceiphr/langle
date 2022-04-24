@@ -40,17 +40,21 @@ const EndModal = ({ isOpen, setIsOpen, gameState }) => {
                         <TextInput
                             required
                             label="Name"
+                            name="Name"
                             placeholder="Joe"
                         />
                         <TextInput
                             required
                             label="Email"
+                            name="Email"
                             placeholder="mamaj@stevens.edu"
                         />
                         <Checkbox
                             mt="md"
+                            name="Have you played Wordle before?"
                             label="Have you played Wordle before?"
                         />
+                        <br />
                         <Button type="submit">Send</Button>
                     </form>
                 </>}

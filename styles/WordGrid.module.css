@@ -16,6 +16,12 @@
     border-radius: 8px;
 }
 
+@media (prefers-color-scheme: dark) {
+    .letter {
+        border: 2px solid #444;
+    }
+}
+
 .letter:not(:last-child) {
     margin-right: 5px;
 }
