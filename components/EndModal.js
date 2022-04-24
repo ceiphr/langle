@@ -9,7 +9,7 @@ const EndModal = ({ isOpen, setIsOpen, gameState }) => {
         >
             <h1>You {gameState ? "win" : "lose"}!</h1>
             <h2>Survey</h2>
-            <form name="contact" method="post">
+            <form name="contact" method="post" data-netlify="true">
                 <TextInput
                     required
                     label="Name"
