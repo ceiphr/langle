@@ -1,22 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import anime from 'animejs';
 import { LetterType } from '../data/enums';
 import styles from '../styles/WordGrid.module.css';
 
-const Letter = ({ letter, type }) => {
+const Letter = ({ letter, stagger, type }) => {
     return (
-        <div className={styles.letter.concat(` ${type}`)}>
+        <div className={styles.letter.concat(` ${stagger ? type ? 'stagger' : '' : ''} ${type}`)}>
             <span>{letter}</span>
         </div>
     );
 };
 
 const WordGrid = ({ word, board, guess }) => {
+    useEffect(() => {
+        anime({
+            targets: '.stagger',
+            opacity: [0, 1],
+            delay: anime.stagger(250),
+            duration: 1000,
+            easing: 'easeOutExpo'
+        })
+    }, [guess]);
+
     return (
         <>
             {board.map((row, i) => (
                 <div key={i} className={styles.gridRow}>
                     {row.map((letter, j) => {
-                        let type = "";
+                        let type = "",
+                            stagger = false;
+                        if (i === guess - 1)
+                            stagger = true;
+
                         if (i >= guess)
                             type = "";
                         else if (word[j] === letter)
@@ -28,7 +43,7 @@ const WordGrid = ({ word, board, guess }) => {
                         else
                             type = LetterType.Incorrect;
 
-                        return <Letter key={`${i}${j}`} type={type} letter={letter} />
+                        return <Letter key={`${i}${j}`} stagger={stagger} type={type} letter={letter} />
                     })}
                 </div>
             ))}

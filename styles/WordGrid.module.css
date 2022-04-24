@@ -21,6 +21,7 @@
 }
 
 .letter span {
+    opacity: 1 !important;
     display: inline-block;
     vertical-align: middle;
     line-height: normal;

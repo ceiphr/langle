@@ -59,21 +59,16 @@ export default function Home() {
         if (guess === rowSize)
             return;
 
-        if (position === colSize && guess < rowSize - 1) {
+        if (position === colSize) {
             setGuess(guess + 1);
             if (board[guess].join("") === answerWord) {
                 setGameState(true);
                 setEndModalIsOpen(true);
+            } else if (guess === rowSize - 1) {
+                setGameState(false);
+                setEndModalIsOpen(true);
             }
             setPosition(0);
-        }
-        else if (position === colSize && guess === rowSize - 1) {
-            setGuess(guess + 1);
-            if (board[guess].join("") === answerWord)
-                setGameState(true);
-            else
-                setGameState(false);
-            setEndModalIsOpen(true);
         }
     };
 
@@ -91,11 +86,13 @@ export default function Home() {
 
     // Hack for taking input from the physical keyboard
     useEffect(() => {
-        if (gameState === null)
-            setInterval(function () {
-                document.getElementById("word-input").focus();
-            }, 10);
-    });
+        const focusInput = setInterval(function () {
+            document.getElementById("word-input").focus();
+        }, 10);
+        if (gameState !== null)
+            clearInterval(focusInput);
+        return () => clearInterval(focusInput);
+    }, [gameState]);
 
     return (
         <div className={styles.container}>
@@ -116,6 +113,7 @@ export default function Home() {
             {/* Hidden input used to take input from physical keyboard */}
             <input
                 id="word-input"
+                inputMode="none"
                 onKeyDown={handleKeyDown}
                 type="text"
                 className={styles.hiddenInput}

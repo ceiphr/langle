@@ -14,6 +14,7 @@
     "@mantine/hooks": "^4.1.5",
     "@mantine/modals": "^4.1.5",
     "@mantine/next": "^4.1.5",
+    "animejs": "^3.2.1",
     "next": "12.1.4",
     "react": "18.0.0",
     "react-dom": "18.0.0",
