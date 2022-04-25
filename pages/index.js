@@ -4,6 +4,7 @@ import Head from "next/head";
 import WordGrid from "@components/WordGrid";
 import Keyboard from "@components/Keyboard";
 import EndModal from "@components/EndModal";
+import Survey from "@components/Survey";
 import { problems } from "@data/problems";
 import styles from "@styles/Home.module.css";
 
@@ -146,6 +147,8 @@ export default function Home() {
                 type="text"
                 className={styles.hiddenInput}
             />
+            {/* Hack for getting Netlify to see the form */}
+            <Survey hidden />
         </div >
     );
 }
