@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput, Checkbox, Modal, Button } from '@mantine/core';
 
-const EndModal = ({ isOpen, setIsOpen, gameState }) => {
+const EndModal = ({ isOpen, setIsOpen, nextLevel, gameState }) => {
     const [submitted, setSubmitted] = useState(false);
 
     const encode = (data) => {
@@ -33,6 +33,7 @@ const EndModal = ({ isOpen, setIsOpen, gameState }) => {
             onClose={() => setIsOpen(false)}
         >
             <h1>You {gameState ? "win" : "lose"}!</h1>
+            <Button onClick={() => nextLevel()}>Next Level?</Button>
             {submitted ? <h2>Thank you for playing!</h2> :
                 <>
                     <h2>Survey</h2>

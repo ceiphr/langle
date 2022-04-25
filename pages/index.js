@@ -3,15 +3,17 @@ import Head from "next/head";
 import WordGrid from "../components/WordGrid";
 import Keyboard from "../components/Keyboard";
 import EndModal from "../components/EndModal";
+import { problems } from "../data/problems";
 import styles from "../styles/Home.module.css";
-
-const answerWord = "llamo".toUpperCase();
 
 export default function Home() {
     const allowedLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
-    // Consts to generate board state
+    // Consts to generate board state, question and answer
     const rowSize = 3, colSize = 5,
+        [prompt, setPrompt] = useState(""),
+        [answerWord, setAnswerWord] = useState(""),
+        [level, setLevel] = useState(0),
         [board, setBoard] = useState(Array(rowSize).fill(0).map(() => new Array(colSize).fill("")))
 
     // Consts used for managing game state and input state
@@ -72,6 +74,15 @@ export default function Home() {
         }
     };
 
+    const nextLevel = () => {
+        setLevel(level + 1);
+        setGuess(0);
+        setPosition(0);
+        setBoard(Array(rowSize).fill(0).map(() => new Array(colSize).fill("")));
+        setGameState(null);
+        setEndModalIsOpen(false);
+    };
+
     // Handles the physical keyboard input
     const handleKeyDown = (event) => {
         if (gameState !== null)
@@ -94,6 +105,22 @@ export default function Home() {
         return () => clearInterval(focusInput);
     }, [gameState]);
 
+    useEffect(() => {
+        const today = new Date();
+        const index = problems.length % (today.getDay() + 1);
+        let levelString = "easy";
+
+        if (level === 0)
+            levelString = "easy";
+        else if (level === 1)
+            levelString = "medium";
+        else if (level === 2)
+            levelString = "hard";
+
+        setAnswerWord(problems[index][levelString].answer.toUpperCase());
+        setPrompt(problems[index][levelString].question);
+    }, [level]);
+
     return (
         <div className={styles.container}>
             <Head>
@@ -105,11 +132,11 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.main}>
-                <h1 className={styles.title}>Hola, me _____ Gregg.</h1>
+                <h1 className={styles.title}>{prompt}</h1>
                 <WordGrid word={answerWord} board={board} guess={guess} />
                 <Keyboard word={answerWord} board={board} takeInput={takeInput} guess={guess} />
             </main>
-            <EndModal isOpen={endModalIsOpen} setIsOpen={setEndModalIsOpen} gameState={gameState} />
+            <EndModal isOpen={endModalIsOpen} setIsOpen={setEndModalIsOpen} nextLevel={nextLevel} gameState={gameState} />
             {/* Hidden input used to take input from physical keyboard */}
             <input
                 id="word-input"
