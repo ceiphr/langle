@@ -27,6 +27,20 @@ a {
     text-align: center;
 }
 
+.fade {
+    animation: fadeout 0.2s;
+    opacity: 0;
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
 /* Color styles */
 
 .green,

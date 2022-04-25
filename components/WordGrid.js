@@ -14,6 +14,7 @@ const Letter = ({ letter, stagger, type }) => {
 
 const WordGrid = ({ word, board, guess }) => {
     // TODO Delay modal while animation is playing
+    // TODO Delay keyboard reveal while animation is playing
     useEffect(() => {
         anime({
             targets: '.stagger',

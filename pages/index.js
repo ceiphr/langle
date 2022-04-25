@@ -12,11 +12,11 @@ export default function Home() {
     const allowedLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
     // Consts to generate board state, question and answer
-    const rowSize = 3, colSize = 5,
+    const [dim, setDim] = useState({ rows: 4, cols: 5 }),
         [prompt, setPrompt] = useState(""),
         [answerWord, setAnswerWord] = useState(""),
         [level, setLevel] = useState(0),
-        [board, setBoard] = useState(Array(rowSize).fill(0).map(() => new Array(colSize).fill("")))
+        [board, setBoard] = useState(Array(dim.rows).fill(0).map(() => new Array(dim.cols).fill("")))
 
     // Consts used for managing game state and input state
     const [gameState, setGameState] = useState(null),
@@ -39,7 +39,7 @@ export default function Home() {
             return;
 
 
-        if (position < colSize && guess < rowSize) {
+        if (position < dim.cols && guess < dim.rows) {
             let newBoard = JSON.parse(JSON.stringify(board));
             newBoard[guess][position] = input.toUpperCase();
             setBoard(newBoard);
@@ -50,7 +50,7 @@ export default function Home() {
     // Removes the last letter from the board
     // and updates the position and board state
     const removeLetter = () => {
-        if (position > 0 && guess < rowSize) {
+        if (position > 0 && guess < dim.rows) {
             let newBoard = [...board];
             newBoard[guess][position - 1] = "";
             setBoard(newBoard);
@@ -60,29 +60,28 @@ export default function Home() {
 
     // Guesses the word and updates the guess, position and game state
     const guessWord = () => {
-        if (guess === rowSize)
+        if (guess === dim.rows)
             return;
 
-        if (position === colSize) {
+        if (position === dim.cols) {
             setGuess(guess + 1);
             if (board[guess].join("") === answerWord) {
                 setGameState(true);
-                setEndModalIsOpen(true);
-            } else if (guess === rowSize - 1) {
+                setTimeout(() => setEndModalIsOpen(true), 1500);
+            } else if (guess === dim.rows - 1) {
                 setGameState(false);
-                setEndModalIsOpen(true);
+                setTimeout(() => setEndModalIsOpen(true), 1500);
             }
             setPosition(0);
         }
     };
 
     const nextLevel = () => {
+        setEndModalIsOpen(false);
         setLevel(level + 1);
         setGuess(0);
         setPosition(0);
-        setBoard(Array(rowSize).fill(0).map(() => new Array(colSize).fill("")));
         setGameState(null);
-        setEndModalIsOpen(false);
     };
 
     // Handles the physical keyboard input
@@ -109,7 +108,8 @@ export default function Home() {
 
     useEffect(() => {
         const today = new Date();
-        const index = problems.length % (today.getDay() + 1);
+        // TODO Day change doesn't work
+        const index = today.getDay() % problems.length;
         let levelString = "easy";
 
         if (level === 0)
@@ -119,8 +119,11 @@ export default function Home() {
         else if (level === 2)
             levelString = "hard";
 
+        // TODO Implement persistent storage
         setAnswerWord(problems[index][levelString].answer.toUpperCase());
         setPrompt(problems[index][levelString].question);
+        setDim({ rows: 4 - level, cols: problems[index][levelString].answer.length });
+        setBoard(Array(4 - level).fill(0).map(() => new Array(problems[index][levelString].answer.length).fill("")));
     }, [level]);
 
     return (

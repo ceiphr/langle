@@ -33,8 +33,8 @@ const Key = ({ letterKey, word, guess, board, onClick }) => {
 }
 
 const Keyboard = ({ board, word, guess, takeInput }) => {
-    const row1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-        row2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+    const row1 = ["Q", "W", "E", "R", "T", "Y", "U", "Í", "O", "P"],
+        row2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"],
         row3 = ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "DELETE"];
 
     return (
