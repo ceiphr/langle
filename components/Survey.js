@@ -20,13 +20,29 @@ const Survey = ({ hidden = false }) => {
         question10: "",
     });
 
+    function encode(data) {
+        return Object.keys(data)
+            .map(
+                (key) =>
+                    encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+            )
+            .join("&");
+    }
+
     const handleSubmit = (event) => {
+        console.log(encode({
+            "form-name": event.target.getAttribute("name"),
+            ...formData
+        }))
         event.preventDefault();
         console.log(formData);
         fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: JSON.stringify(formData)
+            body: encode({
+                "form-name": event.target.getAttribute("name"),
+                ...formData
+            }),
         })
             .then(() => setSubmitted(true))
             .catch((error) => alert(error));
