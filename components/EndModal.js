@@ -58,7 +58,7 @@ const EndModal = ({ isOpen, setIsOpen, nextLevel, gameState }) => {
                         <br />
                         <Button type="submit">Send</Button>
                     </form> */}
-                    <form name="contact" action="/" method="POST">
+                    <form name="contact" action="/" method="POST" data-netlify="true">
                         <input type="hidden" name="form-name" value="contact" />
                         <p>
                             <input type="text" name="firstname" id="firstname" />

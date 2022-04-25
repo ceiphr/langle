@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import anime from 'animejs';
-import { LetterType } from '../data/enums';
-import styles from '../styles/WordGrid.module.css';
+
+import { LetterType } from '@data/enums';
+import styles from '@styles/WordGrid.module.css';
 
 const Letter = ({ letter, stagger, type }) => {
     return (

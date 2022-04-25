@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
-import WordGrid from "../components/WordGrid";
-import Keyboard from "../components/Keyboard";
-import EndModal from "../components/EndModal";
-import { problems } from "../data/problems";
-import styles from "../styles/Home.module.css";
+
+import WordGrid from "@components/WordGrid";
+import Keyboard from "@components/Keyboard";
+import EndModal from "@components/EndModal";
+import { problems } from "@data/problems";
+import styles from "@styles/Home.module.css";
 
 export default function Home() {
     const allowedLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];

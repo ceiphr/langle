@@ -1,6 +1,7 @@
 import React from 'react';
-import { LetterType } from '../data/enums';
-import styles from '../styles/Keyboard.module.css';
+
+import { LetterType } from '@data/enums';
+import styles from '@styles/Keyboard.module.css';
 
 const Key = ({ letterKey, word, guess, board, onClick }) => {
     let type = "";
