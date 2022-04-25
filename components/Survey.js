@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import { RadioGroup, Radio, NumberInput, Textarea, Select, Button, Notification } from '@mantine/core';
 import { Check } from 'tabler-icons-react';
+import { questions } from '@data/surveyQuestions';
 import styles from "@styles/Survey.module.css";
 
 const Survey = ({ hidden = false }) => {
     const [submitted, setSubmitted] = useState(false);
     const [notifHidden, setNotifHidden] = useState(false);
     const [formData, setDataForm] = useState({
-        "Are you using Langle on Desktop or Mobile?": "",
-        "Have you ever played Wordle?": "",
-        "Which theme did you use?": "",
-        "Which of the following start modes do you prefer?": "",
-        "Which of the following describes your interaction with the keyboard?": "",
-        "How often do you see yourself using this game in the future?": "",
-        "How many attempts do you think would be fair for the easy prompt you were presented with? (You were given 4 attempts)": "",
-        "Would you see yourself using this game in order to learn a language?": "",
-        "Did you have any difficulty navigating or interacting with the prompt?": "",
-        "What quick feedback would you like to give our development team for future iterations? (150 words)": "",
+        [questions[0]]: "",
+        [questions[1]]: "",
+        [questions[2]]: "",
+        [questions[3]]: "",
+        [questions[4]]: "",
+        [questions[5]]: "",
+        [questions[6]]: "",
+        [questions[7]]: "",
+        [questions[8]]: "",
+        [questions[9]]: "",
+        [questions[10]]: "",
     });
 
     function encode(data) {
@@ -63,58 +65,53 @@ const Survey = ({ hidden = false }) => {
             <form className={styles.form} name="survey-iteration-1" method="POST" data-netlify="true" onSubmit={handleSubmit}>
                 <input type="hidden" name="form-name" value="survey-iteration-1" />
                 <RadioGroup
-                    label="Are you using Langle on Desktop or Mobile?"
-                    name="Are you using Langle on Desktop or Mobile?"
-                    value={formData.question1}
-                    onChange={(value) => setDataForm({ ...formData, question1: value })}
+                    label={questions[0]}
+                    name={questions[0]}
+                    onChange={(value) => setDataForm({ ...formData, [questions[0]]: value })}
                 >
                     <Radio value="Desktop" label="Desktop" />
                     <Radio value="Mobile" label="Mobile" />
                 </RadioGroup>
                 <RadioGroup
-                    label="Have you ever played Wordle?"
-                    name="Have you ever played Wordle?"
-                    value={formData.question2}
-                    onChange={(value) => setDataForm({ ...formData, question2: value })}
+                    label={questions[1]}
+                    name={questions[1]}
+                    onChange={(value) => setDataForm({ ...formData, [questions[1]]: value })}
                 >
                     <Radio value="Yes" label="Yes" />
                     <Radio value="No" label="No" />
                 </RadioGroup>
                 <RadioGroup
-                    label="Which theme did you use?"
-                    name="Which theme did you use?"
-                    value={formData.question3}
-                    onChange={(value) => setDataForm({ ...formData, question3: value })}
+                    label={questions[2]}
+                    name={questions[2]}
+                    onChange={(value) => setDataForm({ ...formData, [questions[2]]: value })}
                 >
                     <Radio value="Light" label="Light" />
                     <Radio value="Dark" label="Dark" />
                 </RadioGroup>
                 <Select
-                    label="Which of the following start modes do you prefer?"
-                    name="Which of the following start modes do you prefer?"
+                    label={questions[3]}
+                    name={questions[3]}
                     placeholder="Pick one"
                     data={[
                         { value: 'Game starts in the easiest difficulty, and the user is prompted for difficulty after each prompt.', label: 'Game starts in the easiest difficulty, and the user is prompted for difficulty after each prompt.' },
                         { value: 'The user is prompted to choose a difficulty in the beginning, but can still change after every prompt.', label: 'The user is prompted to choose a difficulty in the beginning, but can still change after every prompt.' },
                     ]}
-                    value={formData.question4}
-                    onChange={(value) => setDataForm({ ...formData, question4: value })}
+                    onChange={(value) => setDataForm({ ...formData, [questions[3]]: value })}
                 />
                 <Select
-                    label="Which of the following describes your interaction with the keyboard?"
-                    name="Which of the following describes your interaction with the keyboard?"
+                    label={questions[4]}
+                    name={questions[4]}
                     placeholder="Pick one"
                     data={[
                         { value: 'I only used the virtual keyboard to type in the guessed words.', label: 'I only used the virtual keyboard to type in the guessed words.' },
                         { value: 'I only used my regular keyboard to type in the guessed words.', label: 'I only used my regular keyboard to type in the guessed words.' },
                         { value: 'I used both the virtual and regular keyboard to type in the guessed words.', label: 'I used both the virtual and regular keyboard to type in the guessed words.' },
                     ]}
-                    value={formData.question5}
-                    onChange={(value) => setDataForm({ ...formData, question5: value })}
+                    onChange={(value) => setDataForm({ ...formData, [questions[4]]: value })}
                 />
                 <Select
-                    label="How often do you see yourself using this game in the future?"
-                    name="How often do you see yourself using this game in the future?"
+                    label={questions[5]}
+                    name={questions[5]}
                     placeholder="Pick one"
                     data={[
                         { value: 'Multiple times a day', label: 'Multiple times a day' },
@@ -122,37 +119,34 @@ const Survey = ({ hidden = false }) => {
                         { value: 'Multiple times a month', label: 'Multiple times a month' },
                         { value: 'Never', label: 'Never' },
                     ]}
-                    value={formData.question6}
-                    onChange={(value) => setDataForm({ ...formData, question6: value })}
+                    onChange={(value) => setDataForm({ ...formData, [questions[5]]: value })}
                 />
                 <NumberInput
-                    label="How many attempts do you think would be fair for the easy prompt you were presented with? (You were given 4 attempts)"
-                    name="How many attempts do you think would be fair for the easy prompt you were presented with? (You were given 4 attempts)"
+                    label={questions[6]}
+                    name={questions[6]}
                     placeholder="Pick one"
                     defaultValue={4}
-                    value={formData.question7}
-                    onChange={(value) => setDataForm({ ...formData, question7: value })}
+                    onChange={(value) => setDataForm({ ...formData, [questions[6]]: value })}
                 />
                 <RadioGroup
-                    label="Would you see yourself using this game in order to learn a language?"
-                    name="Would you see yourself using this game in order to learn a language?"
+                    label={questions[7]}
+                    name={questions[7]}
                     required
-                    value={formData.question8}
-                    onChange={(value) => setDataForm({ ...formData, question8: value })}
+                    onChange={(value) => setDataForm({ ...formData, [questions[7]]: value })}
                 >
                     <Radio value="Yes" label="Yes" />
                     <Radio value="No" label="No" />
                     <Radio value="Maybe" label="Maybe" />
                 </RadioGroup>
                 <Textarea
-                    label="Did you have any difficulty navigating or interacting with the prompt?"
-                    name="Did you have any difficulty navigating or interacting with the prompt?"
-                    onChange={(event) => setDataForm({ ...formData, question9: event.target.value })}
+                    label={questions[8]}
+                    name={questions[8]}
+                    onChange={(event) => setDataForm({ ...formData, [questions[8]]: event.target.value })}
                 />
                 <Textarea
-                    label="What quick feedback would you like to give our development team for future iterations? (150 words)"
-                    name="What quick feedback would you like to give our development team for future iterations? (150 words)"
-                    onChange={(event) => setDataForm({ ...formData, question10: event.target.value })}
+                    label={questions[9]}
+                    name={questions[9]}
+                    onChange={(event) => setDataForm({ ...formData, [questions[9]]: event.target.value })}
                 />
                 <Button type="submit">Submit</Button>
             </form>
