@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { MantineProvider } from '@mantine/core';
 import { useColorScheme } from '@mantine/hooks';
 import Head from "next/head";
+import Script from 'next/script'
 
 import Navigation from "@components/Navigation";
 import WordGrid from "@components/WordGrid";
@@ -147,6 +148,19 @@ export default function Home() {
                 />
                 {/* Hack for getting Netlify to see the form */}
                 <Survey hidden />
+                <Script
+                    src="https://www.googletagmanager.com/gtag/js?id=G-X66M623B3H"
+                    strategy="afterInteractive"
+                />
+                <Script id="google-analytics" strategy="afterInteractive">
+                    {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        
+                        gtag('config', 'G-X66M623B3H');
+                    `}
+                </Script>
             </div>
         </MantineProvider>
     );
