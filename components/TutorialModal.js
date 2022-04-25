@@ -1,12 +1,17 @@
 import React from 'react';
-import { Modal } from '@mantine/core';
+import { Button, Modal } from '@mantine/core';
 
 import { Letter } from '@components/WordGrid';
 import { LetterType } from '@data/enums';
 import styles from '@styles/WordGrid.module.css';
 
-const TutorialModal = ({ isOpen, setIsOpen }) => {
+const TutorialModal = ({ setLanguage, isOpen, setIsOpen }) => {
     const examples = ["llamo", "gusta"]
+
+    const handleLanguageChange = (language) => {
+        setLanguage(language);
+        setIsOpen(false);
+    }
 
     return (
         <Modal
@@ -14,9 +19,9 @@ const TutorialModal = ({ isOpen, setIsOpen }) => {
             onClose={() => setIsOpen(false)}
             title="Tutorial:"
         >
-            <p>Guess the <strong>LANGLE</strong> in four tries.<br /><br /> There are three
-                levels everyday. The number of allowed tries is decreased by
-                one each level. Word length may increase in higher levels.
+            <p>
+                Guess the <strong>LANGLE</strong> in four tries.<br /> There are three
+                levels everyday. The number of allowed tries is decreased each level. Word length may increase in higher levels.
             </p>
             <hr />
             <p>Examples:</p>
@@ -48,6 +53,13 @@ const TutorialModal = ({ isOpen, setIsOpen }) => {
                 })}
             </div>
             <p>The letter <strong>U</strong> is not in the word. The letter <strong>A</strong> is in the word, but in the wrong spot.</p>
+            <hr />
+            <p>Choose your language:</p>
+            <div className={styles.gridRow}>
+                <Button className={styles.button} onClick={() => handleLanguageChange("spanish")}>Spanish</Button>
+                <Button onClick={() => handleLanguageChange("french")}>French</Button>
+            </div>
+            <p>You can change your language at any time from the navigation bar.</p>
         </Modal>
     );
 };

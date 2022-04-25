@@ -1,5 +1,7 @@
 .gridRow {
     display: flex;
+    width: 100%;
+    max-width: 315px;
 }
 
 .gridRow:not(:first-child) {
@@ -11,7 +13,8 @@
     justify-content: center;
     align-items: center;
     height: 60px;
-    width: 60px;
+    max-width: 60px;
+    width: 100%;
     border: 2px solid #ccc;
     border-radius: 8px;
 }
@@ -33,4 +36,8 @@
     line-height: normal;
     font-weight: bold;
     font-size: 2em;
+}
+
+.button {
+    margin-right: 5px;
 }

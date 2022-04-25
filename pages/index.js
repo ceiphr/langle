@@ -6,7 +6,7 @@ import Keyboard from "@components/Keyboard";
 import EndModal from "@components/EndModal";
 import TutorialModal from "@components/TutorialModal";
 import Survey from "@components/Survey";
-import { problems } from "@data/problems";
+import { spanishProblems, frenchProblems } from "@data/problems";
 import styles from "@styles/Home.module.css";
 
 export default function Home() {
@@ -21,6 +21,7 @@ export default function Home() {
 
     // Consts used for managing game state and input state
     const [gameState, setGameState] = useState(null),
+        [language, setLanguage] = useState("spanish"),
         [endModalIsOpen, setEndModalIsOpen] = useState(false),
         [tutorialModalIsOpen, setTutorialModalIsOpen] = useState(true),
         [position, setPosition] = useState(0),
@@ -109,6 +110,8 @@ export default function Home() {
     }, [gameState]);
 
     useEffect(() => {
+        let problems = language === "spanish" ? spanishProblems : frenchProblems;
+
         const today = new Date();
         const index = today.getDay() % problems.length;
         let levelString = "easy";
@@ -125,7 +128,7 @@ export default function Home() {
         setPrompt(problems[index][levelString].question);
         setDim({ rows: 4 - level, cols: problems[index][levelString].answer.length });
         setBoard(Array(4 - level).fill(0).map(() => new Array(problems[index][levelString].answer.length).fill("")));
-    }, [level]);
+    }, [level, language]);
 
     return (
         <div className={styles.container}>
@@ -137,7 +140,7 @@ export default function Home() {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <TutorialModal isOpen={tutorialModalIsOpen} setIsOpen={setTutorialModalIsOpen} />
+            <TutorialModal setLanguage={setLanguage} isOpen={tutorialModalIsOpen} setIsOpen={setTutorialModalIsOpen} />
             <main className={styles.main}>
                 <h1 className={styles.title}>{prompt}</h1>
                 <WordGrid word={answerWord} board={board} guess={guess} />
