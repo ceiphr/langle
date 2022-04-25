@@ -37,7 +37,7 @@ const EndModal = ({ isOpen, setIsOpen, nextLevel, gameState }) => {
             {submitted ? <h2>Thank you for playing!</h2> :
                 <>
                     <h2>Survey</h2>
-                    <form data-netlify="true" name="langle-survey" method="post" onSubmit={handleSubmit}>
+                    {/* <form data-netlify="true" name="langle-survey" method="post" onSubmit={handleSubmit}>
                         <TextInput
                             required
                             label="Name"
@@ -57,6 +57,19 @@ const EndModal = ({ isOpen, setIsOpen, nextLevel, gameState }) => {
                         />
                         <br />
                         <Button type="submit">Send</Button>
+                    </form> */}
+                    <form
+                        data-netlify="true"
+                        name="test-survey"
+                        method="post"
+                        onSubmit={handleSubmit}
+                    >
+                        <input type="hidden" name="form-name" value="pizzaOrder" />
+                        <label>
+                            Have you played Wordle before?
+                            <input name="order" type="text" />
+                        </label>
+                        <input type="submit" />
                     </form>
                 </>}
         </Modal>
