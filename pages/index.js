@@ -137,7 +137,7 @@ export default function Home() {
                 <WordGrid word={answerWord} board={board} guess={guess} />
                 <Keyboard word={answerWord} board={board} takeInput={takeInput} guess={guess} />
             </main>
-            <EndModal isOpen={endModalIsOpen} setIsOpen={setEndModalIsOpen} nextLevel={nextLevel} gameState={gameState} />
+            <EndModal isOpen={endModalIsOpen} setIsOpen={setEndModalIsOpen} level={level} nextLevel={nextLevel} gameState={gameState} />
             {/* Hidden input used to take input from physical keyboard */}
             <input
                 id="word-input"

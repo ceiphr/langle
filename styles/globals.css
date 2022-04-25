@@ -23,6 +23,10 @@ a {
     box-sizing: border-box;
 }
 
+.center {
+    text-align: center;
+}
+
 /* Color styles */
 
 .green,
