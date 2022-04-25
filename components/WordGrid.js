@@ -6,15 +6,15 @@ import styles from '@styles/WordGrid.module.css';
 
 export const Letter = ({ letter, stagger, type }) => {
     return (
-        <div className={styles.letter.concat(` ${stagger ? type ? 'stagger' : '' : ''} ${type}`)}>
-            <span>{letter}</span>
+        <div className={styles.letterWrapper}>
+            <div className={styles.letter.concat(` ${stagger ? type ? 'stagger' : '' : ''} ${type}`)}>
+                <span>{letter}</span>
+            </div>
         </div>
     );
 };
 
 const WordGrid = ({ word, board, guess }) => {
-    // TODO Delay modal while animation is playing
-    // TODO Delay keyboard reveal while animation is playing
     useEffect(() => {
         anime({
             targets: '.stagger',

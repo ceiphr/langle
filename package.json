@@ -16,9 +16,11 @@
     "@mantine/next": "^4.1.5",
     "animejs": "^3.2.1",
     "next": "12.1.4",
+    "next-persist": "^1.2.4",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-modal": "^3.14.4",
+    "redux": "^4.2.0",
     "tabler-icons-react": "^1.46.0"
   },
   "devDependencies": {

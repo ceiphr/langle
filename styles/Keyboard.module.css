@@ -16,15 +16,16 @@
     align-items: center;
     height: 50px;
     min-width: 30px;
-    border: 2px solid #ccc;
+    border: 2px solid #dee2e6;
     margin: 0 2px;
     padding: 5px;
     border-radius: 4px;
     font-size: 12px;
+    transition: all 0.1s ease-in-out;
 }
 
 @media (prefers-color-scheme: dark) {
     .key {
-        border: 2px solid #444;
+        border: 2px solid #495057;
     }
 }

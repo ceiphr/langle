@@ -9,23 +9,33 @@
 }
 
 .letter {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.letterWrapper {
+    position: relative;
     height: 60px;
     max-width: 60px;
     width: 100%;
-    border: 2px solid #ccc;
+    border: 2px solid #dee2e6;
     border-radius: 8px;
+    overflow: hidden;
 }
 
 @media (prefers-color-scheme: dark) {
-    .letter {
-        border: 2px solid #444;
+    .letterWrapper {
+        border: 2px solid #495057;
     }
 }
 
-.letter:not(:last-child) {
+.letterWrapper:not(:last-child) {
     margin-right: 5px;
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { LetterType } from '@data/enums';
 import styles from '@styles/Keyboard.module.css';
@@ -37,16 +37,25 @@ const Keyboard = ({ board, word, guess, takeInput }) => {
         row2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"],
         row3 = ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "DELETE"];
 
+    // Used to delay reveal of letters
+    const [delayBoard, setDelayBoard] = useState([]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setDelayBoard(board);
+        }, 2000);
+    }, [guess]);
+
     return (
         <div className={styles.keyboard}>
             <div className={styles.keyboardRow}>
-                {row1.map((letter, i) => <Key key={i} letterKey={letter} guess={guess} board={board} word={word} onClick={() => takeInput(letter)} />)}
+                {row1.map((letter, i) => <Key key={i} letterKey={letter} guess={guess} board={delayBoard} word={word} onClick={() => takeInput(letter)} />)}
             </div>
             <div className={styles.keyboardRow}>
-                {row2.map((letter, i) => <Key key={i} letterKey={letter} guess={guess} board={board} word={word} onClick={() => takeInput(letter)} />)}
+                {row2.map((letter, i) => <Key key={i} letterKey={letter} guess={guess} board={delayBoard} word={word} onClick={() => takeInput(letter)} />)}
             </div>
             <div className={styles.keyboardRow}>
-                {row3.map((letter, i) => <Key key={i} letterKey={letter} guess={guess} board={board} word={word} onClick={() => takeInput(letter)} />)}
+                {row3.map((letter, i) => <Key key={i} letterKey={letter} guess={guess} board={delayBoard} word={word} onClick={() => takeInput(letter)} />)}
             </div>
         </div>
     );

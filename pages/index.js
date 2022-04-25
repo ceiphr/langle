@@ -70,10 +70,10 @@ export default function Home() {
             setGuess(guess + 1);
             if (board[guess].join("") === answerWord) {
                 setGameState(true);
-                setTimeout(() => setEndModalIsOpen(true), 1500);
+                setTimeout(() => setEndModalIsOpen(true), 2000);
             } else if (guess === dim.rows - 1) {
                 setGameState(false);
-                setTimeout(() => setEndModalIsOpen(true), 1500);
+                setTimeout(() => setEndModalIsOpen(true), 2000);
             }
             setPosition(0);
         }
@@ -84,7 +84,9 @@ export default function Home() {
         setLevel(level + 1);
         setGuess(0);
         setPosition(0);
-        setGameState(null);
+        setTimeout(() => {
+            setGameState(null);
+        }, 200);
     };
 
     // Handles the physical keyboard input

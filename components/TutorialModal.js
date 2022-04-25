@@ -26,7 +26,7 @@ const TutorialModal = ({ setLanguage, isOpen, setIsOpen }) => {
             <hr />
             <p>Examples:</p>
             <div className={styles.gridRow}>
-                {[...examples[0]].map((letter) => {
+                {[...examples[0]].map((letter, i) => {
                     let type = ""
                     letter = letter.toUpperCase()
 
@@ -35,12 +35,12 @@ const TutorialModal = ({ setLanguage, isOpen, setIsOpen }) => {
                     else if (letter === "O")
                         type = LetterType.InWord
 
-                    return <Letter key={letter} type={type} letter={letter} />
+                    return <Letter key={letter + i + `tutorial`} type={type} letter={letter} />
                 })}
             </div>
             <p>The letter <strong>A</strong> is in the word in the correct spot. The letter <strong>O</strong> is in the word, but in the wrong spot.</p>
             <div className={styles.gridRow}>
-                {[...examples[1]].map((letter) => {
+                {[...examples[1]].map((letter, i) => {
                     let type = ""
                     letter = letter.toUpperCase()
 
@@ -49,7 +49,7 @@ const TutorialModal = ({ setLanguage, isOpen, setIsOpen }) => {
                     else if (letter === "U")
                         type = LetterType.Incorrect
 
-                    return <Letter key={letter} type={type} letter={letter} />
+                    return <Letter key={letter + i + `tutorial`} type={type} letter={letter} />
                 })}
             </div>
             <p>The letter <strong>U</strong> is not in the word. The letter <strong>A</strong> is in the word, but in the wrong spot.</p>
