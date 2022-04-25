@@ -47,6 +47,7 @@ const EndModal = ({ isOpen, setIsOpen, level, nextLevel, gameState }) => {
                     <p>Please answer the following questions when you&apos;re finished playing.</p>
                     <form className={styles.form} name="survey-iteration-1" method="POST" data-netlify="true" onSubmit={() => setSubmitted(true)}>
                         <input type="hidden" name="form-name" value="contact" />
+                        <TextInput name="name" label="Name" />
                         <Select
                             label="Are you using Langle on Desktop or Mobile?"
                             placeholder="Pick one"
