@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { LetterType } from '@data/enums';
 import styles from '@styles/Keyboard.module.css';

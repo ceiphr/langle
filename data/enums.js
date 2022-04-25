@@ -17,4 +17,5 @@ export const Types = {
     SET_GAMESTATE: 'SET_GAMESTATE',
     SET_TUTORIAL: 'SET_TUTORIAL',
     SET_DAY: 'SET_DAY',
+    SET_THEME: 'SET_THEME',
 }

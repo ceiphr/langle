@@ -24,15 +24,9 @@
     height: 60px;
     max-width: 60px;
     width: 100%;
-    border: 2px solid #dee2e6;
+    border: 2px solid rgba(127, 127, 127, 0.3);
     border-radius: 8px;
     overflow: hidden;
-}
-
-@media (prefers-color-scheme: dark) {
-    .letterWrapper {
-        border: 2px solid #495057;
-    }
 }
 
 .letterWrapper:not(:last-child) {

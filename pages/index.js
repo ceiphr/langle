@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { MantineProvider } from '@mantine/core';
+import { useColorScheme } from '@mantine/hooks';
 import Head from "next/head";
 
 import Navigation from "@components/Navigation";
@@ -113,34 +115,39 @@ export default function Home() {
             }, 2000);
     }, [gameState]);
 
+    const preferredColorScheme = useColorScheme();
+    const theme = useSelector(state => state.theme);
+
     return (
-        <div className={styles.container}>
-            <Head>
-                <title>Langle</title>
-                <meta
-                    name="description"
-                    content="It's like Wordle, but you learn a language!"
+        <MantineProvider theme={{ colorScheme: theme !== "" ? theme : preferredColorScheme }} withGlobalStyles>
+            <div className={styles.container}>
+                <Head>
+                    <title>Langle</title>
+                    <meta
+                        name="description"
+                        content="It's like Wordle, but you learn a language!"
+                    />
+                    <link rel="icon" href="/favicon.ico" />
+                </Head>
+                <TutorialModal isOpen={tutorial} setIsOpen={() => dispatch({ type: "SET_TUTORIAL" })} />
+                <Navigation />
+                <main className={styles.main}>
+                    <h1 className={styles.title}>{prompt}</h1>
+                    <WordGrid />
+                    <Keyboard takeInput={takeInput} />
+                </main>
+                <EndModal isOpen={endModalIsOpen} setIsOpen={setEndModalIsOpen} level={level} nextLevel={nextLevel} gameState={gameState} />
+                {/* Hidden input used to take input from physical keyboard */}
+                <input
+                    id="word-input"
+                    inputMode="none"
+                    onKeyDown={handleKeyDown}
+                    type="text"
+                    className={styles.hiddenInput}
                 />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <TutorialModal isOpen={tutorial} setIsOpen={() => dispatch({ type: "SET_TUTORIAL" })} />
-            <Navigation />
-            <main className={styles.main}>
-                <h1 className={styles.title}>{prompt}</h1>
-                <WordGrid />
-                <Keyboard takeInput={takeInput} />
-            </main>
-            <EndModal isOpen={endModalIsOpen} setIsOpen={setEndModalIsOpen} level={level} nextLevel={nextLevel} gameState={gameState} />
-            {/* Hidden input used to take input from physical keyboard */}
-            <input
-                id="word-input"
-                inputMode="none"
-                onKeyDown={handleKeyDown}
-                type="text"
-                className={styles.hiddenInput}
-            />
-            {/* Hack for getting Netlify to see the form */}
-            <Survey hidden />
-        </div >
+                {/* Hack for getting Netlify to see the form */}
+                <Survey hidden />
+            </div>
+        </MantineProvider>
     );
 }

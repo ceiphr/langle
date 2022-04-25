@@ -1,6 +1,7 @@
 import { Types } from "@data/enums"
 
 const initialGameState = {
+    theme: "",
     day: 0,
     dim: { rows: 4, cols: 5 },
     board: Array(4).fill(0).map(() => new Array(5).fill("")),
@@ -120,6 +121,11 @@ export const gameReducer = (state = initialGameState, { type, payload }) => {
                 day: payload
             }
 
+        case Types.SET_THEME:
+            return {
+                ...state,
+                theme: payload
+            }
 
         default:
             return state

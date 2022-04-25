@@ -21,6 +21,9 @@ a {
 
 * {
     box-sizing: border-box;
+    transition-property: background-color, color;
+    transition-duration: 0.4s;
+    transition-timing-function: ease-in-out;
 }
 
 .center {
@@ -51,37 +54,12 @@ a {
 
 .green {
     background-color: #6aaa64;
-    border: 2px solid #6aaa64 !important;
 }
 
 .yellow {
     background-color: #c9b458;
-    border: 2px solid #c9b458 !important;
 }
 
 .gray {
     background-color: #86888a;
-    border: 2px solid #86888a !important;
-}
-
-/* Dark theme */
-
-@media (prefers-color-scheme: dark) {
-    .green,
-    .yellow,
-    .gray {
-        color: black;
-    }
-
-    .green {
-        background-color: #6aaa64;
-    }
-
-    .yellow {
-        background-color: #c9b458;
-    }
-
-    .gray {
-        background-color: #86888a;
-    }
 }
