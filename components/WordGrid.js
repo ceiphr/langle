@@ -4,7 +4,7 @@ import anime from 'animejs';
 import { LetterType } from '@data/enums';
 import styles from '@styles/WordGrid.module.css';
 
-const Letter = ({ letter, stagger, type }) => {
+export const Letter = ({ letter, stagger, type }) => {
     return (
         <div className={styles.letter.concat(` ${stagger ? type ? 'stagger' : '' : ''} ${type}`)}>
             <span>{letter}</span>

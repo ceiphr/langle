@@ -31,10 +31,6 @@ const Survey = ({ hidden = false }) => {
     }
 
     const handleSubmit = (event) => {
-        console.log(encode({
-            "form-name": event.target.getAttribute("name"),
-            ...formData
-        }));
         event.preventDefault();
         fetch("/", {
             method: "POST",

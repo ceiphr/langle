@@ -4,6 +4,7 @@ import Head from "next/head";
 import WordGrid from "@components/WordGrid";
 import Keyboard from "@components/Keyboard";
 import EndModal from "@components/EndModal";
+import TutorialModal from "@components/TutorialModal";
 import Survey from "@components/Survey";
 import { problems } from "@data/problems";
 import styles from "@styles/Home.module.css";
@@ -21,6 +22,7 @@ export default function Home() {
     // Consts used for managing game state and input state
     const [gameState, setGameState] = useState(null),
         [endModalIsOpen, setEndModalIsOpen] = useState(false),
+        [tutorialModalIsOpen, setTutorialModalIsOpen] = useState(true),
         [position, setPosition] = useState(0),
         [guess, setGuess] = useState(0)
 
@@ -108,7 +110,6 @@ export default function Home() {
 
     useEffect(() => {
         const today = new Date();
-        // TODO Day change doesn't work
         const index = today.getDay() % problems.length;
         let levelString = "easy";
 
@@ -136,6 +137,7 @@ export default function Home() {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            <TutorialModal isOpen={tutorialModalIsOpen} setIsOpen={setTutorialModalIsOpen} />
             <main className={styles.main}>
                 <h1 className={styles.title}>{prompt}</h1>
                 <WordGrid word={answerWord} board={board} guess={guess} />

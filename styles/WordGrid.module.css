@@ -10,8 +10,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 75px;
-    width: 75px;
+    height: 60px;
+    width: 60px;
     border: 2px solid #ccc;
     border-radius: 8px;
 }

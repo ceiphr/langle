@@ -17,9 +17,10 @@
     height: 50px;
     min-width: 30px;
     border: 2px solid #ccc;
-    margin: 0 5px;
+    margin: 0 2px;
     padding: 5px;
     border-radius: 4px;
+    font-size: 12px;
 }
 
 @media (prefers-color-scheme: dark) {
