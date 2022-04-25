@@ -6,7 +6,7 @@ import styles from "@styles/Survey.module.css";
 const Survey = ({ hidden = false }) => {
     const [submitted, setSubmitted] = useState(false);
     const [notifHidden, setNotifHidden] = useState(false);
-    const [form, setForm] = useState({
+    const [formData, setDataForm] = useState({
         "form-name": "survey-iteration-1",
         question1: "",
         question2: "",
@@ -22,10 +22,11 @@ const Survey = ({ hidden = false }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log(formData);
         fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: JSON.stringify(form)
+            body: JSON.stringify(formData)
         })
             .then(() => setSubmitted(true))
             .catch((error) => alert(error));
@@ -50,8 +51,8 @@ const Survey = ({ hidden = false }) => {
                 <RadioGroup
                     label="Are you using Langle on Desktop or Mobile?"
                     required
-                    value={form.question1}
-                    onChange={(value) => setForm({ ...form, question1: value })}
+                    value={formData.question1}
+                    onChange={(value) => setDataForm({ ...formData, question1: value })}
                 >
                     <Radio value="Desktop" label="Desktop" />
                     <Radio value="Mobile" label="Mobile" />
@@ -59,8 +60,8 @@ const Survey = ({ hidden = false }) => {
                 <RadioGroup
                     label="Have you ever played Wordle?"
                     required
-                    value={form.question2}
-                    onChange={(value) => setForm({ ...form, question2: value })}
+                    value={formData.question2}
+                    onChange={(value) => setDataForm({ ...formData, question2: value })}
                 >
                     <Radio value="Yes" label="Yes" />
                     <Radio value="No" label="No" />
@@ -68,8 +69,8 @@ const Survey = ({ hidden = false }) => {
                 <RadioGroup
                     label="Have you ever played Wordle?"
                     required
-                    value={form.question3}
-                    onChange={(value) => setForm({ ...form, question3: value })}
+                    value={formData.question3}
+                    onChange={(value) => setDataForm({ ...formData, question3: value })}
                 >
                     <Radio value="Light" label="Light" />
                     <Radio value="Dark" label="Dark" />
@@ -81,8 +82,8 @@ const Survey = ({ hidden = false }) => {
                         { value: 'Game starts in the easiest difficulty, and the user is prompted for difficulty after each prompt.', label: 'Game starts in the easiest difficulty, and the user is prompted for difficulty after each prompt.' },
                         { value: 'The user is prompted to choose a difficulty in the beginning, but can still change after every prompt.', label: 'The user is prompted to choose a difficulty in the beginning, but can still change after every prompt.' },
                     ]}
-                    value={form.question4}
-                    onChange={(value) => setForm({ ...form, question4: value })}
+                    value={formData.question4}
+                    onChange={(value) => setDataForm({ ...formData, question4: value })}
                 />
                 <Select
                     label="Which of the following describes your interaction with the keyboard?"
@@ -92,8 +93,8 @@ const Survey = ({ hidden = false }) => {
                         { value: 'I only used my regular keyboard to type in the guessed words.', label: 'I only used my regular keyboard to type in the guessed words.' },
                         { value: 'I used both the virtual and regular keyboard to type in the guessed words.', label: 'I used both the virtual and regular keyboard to type in the guessed words.' },
                     ]}
-                    value={form.question5}
-                    onChange={(value) => setForm({ ...form, question5: value })}
+                    value={formData.question5}
+                    onChange={(value) => setDataForm({ ...formData, question5: value })}
                 />
                 <Select
                     label="Which of the following describes your interaction with the keyboard?"
@@ -104,21 +105,21 @@ const Survey = ({ hidden = false }) => {
                         { value: 'Multiple times a month', label: 'Multiple times a month' },
                         { value: 'Never', label: 'Never' },
                     ]}
-                    value={form.question6}
-                    onChange={(value) => setForm({ ...form, question6: value })}
+                    value={formData.question6}
+                    onChange={(value) => setDataForm({ ...formData, question6: value })}
                 />
                 <NumberInput
                     label="How many attempts do you think would be fair for the easy prompt you were presented with? (You were given 4 attempts)"
                     placeholder="Pick one"
                     defaultValue={4}
-                    value={form.question7}
-                    onChange={(value) => setForm({ ...form, question7: value })}
+                    value={formData.question7}
+                    onChange={(value) => setDataForm({ ...formData, question7: value })}
                 />
                 <RadioGroup
                     label="Would you see yourself using this game in order to learn a language?"
                     required
-                    value={form.question8}
-                    onChange={(value) => setForm({ ...form, question8: value })}
+                    value={formData.question8}
+                    onChange={(value) => setDataForm({ ...formData, question8: value })}
                 >
                     <Radio value="Yes" label="Yes" />
                     <Radio value="No" label="No" />
@@ -127,14 +128,12 @@ const Survey = ({ hidden = false }) => {
                 <Textarea
                     label="Did you have any difficulty navigating or interacting with the prompt?"
                     name="Name"
-                    value={form.question9}
-                    onChange={(value) => setForm({ ...form, question9: value })}
+                    onChange={(event) => setDataForm({ ...formData, question9: event.target.value })}
                 />
                 <Textarea
                     label="What quick feedback would you like to give our development team for future iterations? (150 words)"
                     name="Name"
-                    value={form.question10}
-                    onChange={(value) => setForm({ ...form, question10: value })}
+                    onChange={(event) => setDataForm({ ...formData, question10: event.target.value })}
                 />
                 <Button type="submit">Submit</Button>
             </form>
