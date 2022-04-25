@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, Checkbox, Modal, Button } from '@mantine/core';
+import { TextInput, Checkbox, Select, Modal, Button } from '@mantine/core';
 
 const EndModal = ({ isOpen, setIsOpen, nextLevel, gameState }) => {
     const [submitted, setSubmitted] = useState(false);
