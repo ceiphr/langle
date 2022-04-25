@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { LetterType } from '@data/enums';
 import styles from '@styles/Keyboard.module.css';
@@ -32,10 +33,13 @@ const Key = ({ letterKey, word, guess, board, onClick }) => {
     );
 }
 
-const Keyboard = ({ board, word, guess, takeInput }) => {
+const Keyboard = ({ takeInput }) => {
     const row1 = ["Q", "W", "E", "R", "T", "Y", "U", "Í", "O", "P"],
         row2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"],
         row3 = ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "DELETE"];
+    const board = useSelector(state => state.board),
+        word = useSelector(state => state.answerWord),
+        guess = useSelector(state => state.guess);
 
     // Used to delay reveal of letters
     const [delayBoard, setDelayBoard] = useState([]);

@@ -24,7 +24,7 @@ export const spanishProblems = [
         },
         "hard": {
             "question": "Me ____ una taza mediana de jugo de naranja.",
-            "answer": "gustaría"
+            "answer": "gustaria"
         }
     }
 ]
@@ -32,16 +32,16 @@ export const spanishProblems = [
 export const frenchProblems = [
     {
         "easy": {
-            "question": "Il a _____ sans dire ______.",
-            "answer": "parler"
+            "question": "Prends ton _____.",
+            "answer": "temps"
         },
         "medium": {
-            "question": "Quel est le plus ______ de la vie?",
-            "answer": "génial"
+            "question": "_____ t'appelles-tu?",
+            "answer": "comment"
         },
         "hard": {
-            "question": "Quel est le plus ______ de faire?",
-            "answer": "faire"
+            "question": "S'il te plaît, regarde _____ pendant que je tape mon mot de passe.",
+            "answer": "ailleurs"
         }
     },
     {
@@ -51,7 +51,7 @@ export const frenchProblems = [
         },
         "medium": {
             "question": "Je _____ ______ en ce moment.",
-            "answer": "étudie"
+            "answer": "etudie"
         },
         "hard": {
             "question": "Je _____ une tasse moyenne de jus de fruit.",

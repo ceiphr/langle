@@ -1,15 +1,17 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, Modal } from '@mantine/core';
 
 import { Letter } from '@components/WordGrid';
 import { LetterType } from '@data/enums';
 import styles from '@styles/WordGrid.module.css';
 
-const TutorialModal = ({ setLanguage, isOpen, setIsOpen }) => {
+const TutorialModal = ({ isOpen, setIsOpen }) => {
+    const dispatch = useDispatch();
     const examples = ["llamo", "gusta"]
 
     const handleLanguageChange = (language) => {
-        setLanguage(language);
+        dispatch({ type: "SET_LANGUAGE", payload: language });
         setIsOpen(false);
     }
 

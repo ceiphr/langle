@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import anime from 'animejs';
 
 import { LetterType } from '@data/enums';
@@ -14,7 +15,11 @@ export const Letter = ({ letter, stagger, type }) => {
     );
 };
 
-const WordGrid = ({ word, board, guess }) => {
+const WordGrid = () => {
+    const board = useSelector(state => state.board),
+        word = useSelector(state => state.answerWord),
+        guess = useSelector(state => state.guess);
+
     useEffect(() => {
         anime({
             targets: '.stagger',
