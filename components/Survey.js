@@ -7,17 +7,16 @@ const Survey = ({ hidden = false }) => {
     const [submitted, setSubmitted] = useState(false);
     const [notifHidden, setNotifHidden] = useState(false);
     const [formData, setDataForm] = useState({
-        "form-name": "survey-iteration-1",
-        question1: "",
-        question2: "",
-        question3: "",
-        question4: "",
-        question5: "",
-        question6: "",
-        question7: "",
-        question8: "",
-        question9: "",
-        question10: "",
+        "Are you using Langle on Desktop or Mobile?": "",
+        "Have you ever played Wordle?": "",
+        "Which theme did you use?": "",
+        "Which of the following start modes do you prefer?": "",
+        "Which of the following describes your interaction with the keyboard?": "",
+        "How often do you see yourself using this game in the future?": "",
+        "How many attempts do you think would be fair for the easy prompt you were presented with? (You were given 4 attempts)": "",
+        "Would you see yourself using this game in order to learn a language?": "",
+        "Did you have any difficulty navigating or interacting with the prompt?": "",
+        "What quick feedback would you like to give our development team for future iterations? (150 words)": "",
     });
 
     function encode(data) {
@@ -33,9 +32,8 @@ const Survey = ({ hidden = false }) => {
         console.log(encode({
             "form-name": event.target.getAttribute("name"),
             ...formData
-        }))
+        }));
         event.preventDefault();
-        console.log(formData);
         fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -66,7 +64,7 @@ const Survey = ({ hidden = false }) => {
                 <input type="hidden" name="form-name" value="survey-iteration-1" />
                 <RadioGroup
                     label="Are you using Langle on Desktop or Mobile?"
-                    required
+                    name="Are you using Langle on Desktop or Mobile?"
                     value={formData.question1}
                     onChange={(value) => setDataForm({ ...formData, question1: value })}
                 >
@@ -75,7 +73,7 @@ const Survey = ({ hidden = false }) => {
                 </RadioGroup>
                 <RadioGroup
                     label="Have you ever played Wordle?"
-                    required
+                    name="Have you ever played Wordle?"
                     value={formData.question2}
                     onChange={(value) => setDataForm({ ...formData, question2: value })}
                 >
@@ -83,8 +81,8 @@ const Survey = ({ hidden = false }) => {
                     <Radio value="No" label="No" />
                 </RadioGroup>
                 <RadioGroup
-                    label="Have you ever played Wordle?"
-                    required
+                    label="Which theme did you use?"
+                    name="Which theme did you use?"
                     value={formData.question3}
                     onChange={(value) => setDataForm({ ...formData, question3: value })}
                 >
@@ -93,6 +91,7 @@ const Survey = ({ hidden = false }) => {
                 </RadioGroup>
                 <Select
                     label="Which of the following start modes do you prefer?"
+                    name="Which of the following start modes do you prefer?"
                     placeholder="Pick one"
                     data={[
                         { value: 'Game starts in the easiest difficulty, and the user is prompted for difficulty after each prompt.', label: 'Game starts in the easiest difficulty, and the user is prompted for difficulty after each prompt.' },
@@ -103,6 +102,7 @@ const Survey = ({ hidden = false }) => {
                 />
                 <Select
                     label="Which of the following describes your interaction with the keyboard?"
+                    name="Which of the following describes your interaction with the keyboard?"
                     placeholder="Pick one"
                     data={[
                         { value: 'I only used the virtual keyboard to type in the guessed words.', label: 'I only used the virtual keyboard to type in the guessed words.' },
@@ -113,7 +113,8 @@ const Survey = ({ hidden = false }) => {
                     onChange={(value) => setDataForm({ ...formData, question5: value })}
                 />
                 <Select
-                    label="Which of the following describes your interaction with the keyboard?"
+                    label="How often do you see yourself using this game in the future?"
+                    name="How often do you see yourself using this game in the future?"
                     placeholder="Pick one"
                     data={[
                         { value: 'Multiple times a day', label: 'Multiple times a day' },
@@ -126,6 +127,7 @@ const Survey = ({ hidden = false }) => {
                 />
                 <NumberInput
                     label="How many attempts do you think would be fair for the easy prompt you were presented with? (You were given 4 attempts)"
+                    name="How many attempts do you think would be fair for the easy prompt you were presented with? (You were given 4 attempts)"
                     placeholder="Pick one"
                     defaultValue={4}
                     value={formData.question7}
@@ -133,6 +135,7 @@ const Survey = ({ hidden = false }) => {
                 />
                 <RadioGroup
                     label="Would you see yourself using this game in order to learn a language?"
+                    name="Would you see yourself using this game in order to learn a language?"
                     required
                     value={formData.question8}
                     onChange={(value) => setDataForm({ ...formData, question8: value })}
@@ -143,12 +146,12 @@ const Survey = ({ hidden = false }) => {
                 </RadioGroup>
                 <Textarea
                     label="Did you have any difficulty navigating or interacting with the prompt?"
-                    name="Name"
+                    name="Did you have any difficulty navigating or interacting with the prompt?"
                     onChange={(event) => setDataForm({ ...formData, question9: event.target.value })}
                 />
                 <Textarea
                     label="What quick feedback would you like to give our development team for future iterations? (150 words)"
-                    name="Name"
+                    name="What quick feedback would you like to give our development team for future iterations? (150 words)"
                     onChange={(event) => setDataForm({ ...formData, question10: event.target.value })}
                 />
                 <Button type="submit">Submit</Button>
