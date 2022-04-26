@@ -21,15 +21,15 @@ const Survey = ({ hidden = false }) => {
         [questions[1]]: "",
         [questions[2]]: "",
         [questions[3]]: "",
-        [questions[4]]: "",
+        [questions[4]]: theme === "" ? preferredColorScheme : theme,
         [questions[5]]: "",
         [questions[6]]: "",
         [questions[7]]: "",
-        [questions[8]]: "",
+        [questions[8]]: 4,
         [questions[9]]: "",
         [questions[10]]: "",
         [questions[11]]: "",
-        [questions[12]]: "",
+        [questions[12]]: level + 1,
     });
 
     function encode(data) {
