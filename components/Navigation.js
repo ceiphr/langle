@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SegmentedControl, Checkbox, Modal, Button } from '@mantine/core';
+import { SegmentedControl, Checkbox, Modal, Button, Group } from '@mantine/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { createStyles } from '@mantine/core';
 import { useColorScheme } from '@mantine/hooks';
@@ -19,6 +19,8 @@ const Navigation = () => {
 
     const handleLanguageChange = () => {
         dispatch({ type: "SET_LANGUAGE", payload: tmpLanguage });
+        dispatch({ type: "SET_GAMESTATE", payload: null });
+        dispatch({ type: "RESET_LEVEL" });
         setModalOpen(false);
     }
 
@@ -33,7 +35,6 @@ const Navigation = () => {
         },
     }));
 
-    const { classes } = useStyles();
     const preferredColorScheme = useColorScheme();
     const [currentTheme, setCurrentTheme] = useState(preferredColorScheme);
 
@@ -48,7 +49,7 @@ const Navigation = () => {
         <>
             <div className={styles.nav}>
                 <h1>Langle</h1>
-                <div className={styles.controls.concat(` ${currentTheme === 'dark' ? classes.controls : ''}`)}>
+                <div className={styles.controls}>
                     <Checkbox
                         className={styles.checkbox}
                         label="Dark"
@@ -56,6 +57,7 @@ const Navigation = () => {
                         onChange={() => updateTheme()}
                     />
                     <SegmentedControl
+                        className={styles.segmentedControl}
                         data={[
                             { label: 'Spanish', value: 'spanish' },
                             { label: 'French', value: 'french' },
@@ -68,7 +70,10 @@ const Navigation = () => {
             <Modal opened={modalOpen} onClose={() => setModalOpen(false)} title="Warning:">
                 <p>Are you sure you want to change your language?
                     Changing your language will reset your current progress.</p>
-                <Button onClick={() => handleLanguageChange()}>Change Language</Button>
+                <Group>
+                <Button color="red" onClick={() => handleLanguageChange()}>Change Language</Button>
+                <Button color="gray" variant="outline" onClick={() => setModalOpen(false)}>Go Back</Button>
+                </Group>
             </Modal>
         </>
     );

@@ -46,16 +46,16 @@ export const frenchProblems = [
     },
     {
         "easy": {
-            "question": "Je _____ en voix basse.",
-            "answer": "parle"
+            "question": "_____ Madame.",
+            "answer": "merci"
         },
         "medium": {
-            "question": "Je _____ ______ en ce moment.",
-            "answer": "etudie"
+            "question": "Je _____ parfois des vidéos.",
+            "answer": "regarde"
         },
         "hard": {
-            "question": "Je _____ une tasse moyenne de jus de fruit.",
-            "answer": "guste"
+            "question": "T'es-tu déjà enregistré en _____ avec la banque ?",
+            "answer": "ligne"
         }
     }
 ]

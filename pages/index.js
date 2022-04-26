@@ -113,7 +113,7 @@ export default function Home() {
         if (gameState !== null)
             setTimeout(() => {
                 setEndModalIsOpen(true);
-            }, 2000);
+            }, 2500);
     }, [gameState]);
 
     const preferredColorScheme = useColorScheme();

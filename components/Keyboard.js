@@ -39,7 +39,8 @@ const Keyboard = ({ takeInput }) => {
         row3 = ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "DELETE"];
     const board = useSelector(state => state.board),
         word = useSelector(state => state.answerWord),
-        guess = useSelector(state => state.guess);
+        guess = useSelector(state => state.guess),
+        level = useSelector(state => state.level);
 
     // Used to delay reveal of letters
     const [delayBoard, setDelayBoard] = useState([]);
@@ -48,7 +49,7 @@ const Keyboard = ({ takeInput }) => {
         setTimeout(() => {
             setDelayBoard(board);
         }, 2000);
-    }, [guess]);
+    }, [guess, level, word]);
 
     return (
         <div className={styles.keyboard}>
