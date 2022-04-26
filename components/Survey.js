@@ -73,8 +73,8 @@ const Survey = ({ hidden = false }) => {
         <div hidden={hidden}>
             <h2>Survey</h2>
             <p>Please answer the following questions when you&apos;re finished playing. You can only submit the form once.</p>
-            <form className={styles.form} name="branch-1" method="POST" data-netlify="true" onSubmit={handleSubmit}>
-                <input type="hidden" name="form-name" value="branch-1" />
+            <form className={styles.form} name="langle-branch-1" method="POST" data-netlify="true" onSubmit={handleSubmit}>
+                <input type="hidden" name="form-name" value="langle-branch-1" />
                 <TextInput placeholder="Joe" name={questions[0]} label={questions[0]} onChange={(e) => setDataForm({ ...formData, [questions[0]]: e.target.value })} />
                 <TextInput placeholder="mamaj@stevens.edu" name={questions[1]} label={questions[1]} onChange={(e) => setDataForm({ ...formData, [questions[1]]: e.target.value })} />
                 <RadioGroup
