@@ -21,9 +21,6 @@ a {
 
 * {
     box-sizing: border-box;
-    transition-property: background-color, color;
-    transition-duration: 0.4s;
-    transition-timing-function: ease-in-out;
 }
 
 .center {
