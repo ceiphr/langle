@@ -25,13 +25,13 @@ const EndModal = ({ isOpen, setIsOpen }) => {
             <div className="center">
                 <h1>You {gameState === true ? "win" : gameState === false ? "lose" : "____"}!</h1>
                 {gameState === false && (<strong>The answer was &quot;{answerWord.toLowerCase()}.&quot;</strong>)}
-                {level === 2 ? <p>You&apos;ve completed all levels for today!<br />Come back tomorrow!</p> :
+                {/* {level === 2 ? <p>You&apos;ve completed all levels for today!<br />Come back tomorrow!</p> :
                     <>
                         <p>You&apos;ve finished level {level + 1}/3.<br />There are three levels everyday.</p>
                         {level < 2 && (<>
                             <Button onClick={() => nextLevel()}>Next Level</Button>
                         </>)}</>
-                }
+                } */}
             </div>
             <Survey />
         </Modal>
