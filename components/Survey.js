@@ -28,6 +28,8 @@ const Survey = ({ hidden = false }) => {
         [questions[8]]: "",
         [questions[9]]: "",
         [questions[10]]: "",
+        [questions[11]]: "",
+        [questions[12]]: "",
     });
 
     function encode(data) {

@@ -128,6 +128,8 @@ export default function Home() {
                         name="description"
                         content="It's like Wordle, but you learn a language!"
                     />
+                    <meta charset="UTF-8" />
+                    <meta name="viewport" content="width=device-width,initial-scale=1" />
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
                 <TutorialModal isOpen={tutorial} setIsOpen={() => dispatch({ type: "SET_TUTORIAL" })} />
@@ -137,7 +139,7 @@ export default function Home() {
                     <WordGrid />
                     <Keyboard takeInput={takeInput} />
                 </main>
-                <EndModal isOpen={endModalIsOpen} setIsOpen={setEndModalIsOpen} level={level} nextLevel={nextLevel} gameState={gameState} />
+                <EndModal isOpen={endModalIsOpen} setIsOpen={setEndModalIsOpen} />
                 {/* Hidden input used to take input from physical keyboard */}
                 <input
                     id="word-input"
