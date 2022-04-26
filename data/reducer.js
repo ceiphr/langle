@@ -107,7 +107,6 @@ export const gameReducer = (state = initialGameState, { type, payload }) => {
                 },
                 position: 0,
                 guess: 0,
-                gameState: null,
             }
 
         case Types.SET_TUTORIAL:
@@ -119,7 +118,10 @@ export const gameReducer = (state = initialGameState, { type, payload }) => {
         case Types.SET_DAY:
             return {
                 ...state,
-                day: payload
+                day: payload,
+                level: 0,
+                position: 0,
+                guess: 0,
             }
 
         case Types.SET_THEME:

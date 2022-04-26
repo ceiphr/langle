@@ -10,7 +10,6 @@ import WordGrid from "@components/WordGrid";
 import Keyboard from "@components/Keyboard";
 import EndModal from "@components/EndModal";
 import TutorialModal from "@components/TutorialModal";
-import Survey from "@components/Survey";
 import { spanishProblems, frenchProblems } from "@data/problems";
 import styles from "@styles/Home.module.css";
 
@@ -22,6 +21,7 @@ export default function Home() {
     const language = useSelector(state => state.language),
         day = useSelector(state => state.day),
         gameState = useSelector(state => state.gameState),
+        guess = useSelector(state => state.guess),
         level = useSelector(state => state.level),
         prompt = useSelector(state => state.prompt),
         answerWord = useSelector(state => state.answerWord),
@@ -38,20 +38,16 @@ export default function Home() {
         }
         else if (input === "ENTER") {
             dispatch({ type: "CHECK_WORD" });
+            setTimeout(() => {
+                if (gameState !== null)
+                    setEndModalIsOpen(true);
+            }, 2500);
             return;
         }
         else if (gameState !== null)
             return;
 
         dispatch({ type: "ADD_CHAR", payload: input });
-    };
-
-    const nextLevel = () => {
-        setEndModalIsOpen(false);
-        dispatch({ type: "NEXT_LEVEL" });
-        setTimeout(() => {
-            dispatch({ type: "SET_GAMESTATE", payload: null });
-        }, 200);
     };
 
     // Handles the physical keyboard input
@@ -62,8 +58,9 @@ export default function Home() {
             takeInput(event.key.toUpperCase());
         if (event.key === "Delete" || event.key === "Backspace")
             dispatch({ type: "REMOVE_CHAR" });
-        if (event.key === "Enter")
+        if (event.key === "Enter") {
             dispatch({ type: "CHECK_WORD" });
+        }
     };
 
     // Hack for taking input from the physical keyboard
@@ -85,8 +82,9 @@ export default function Home() {
 
         if (day !== today.getDay()) {
             dispatch({ type: "SET_DAY", payload: today.getDay() });
-            dispatch({ type: "RESET_LEVEL" });
-            dispatch({ type: "SET_GAMESTATE", payload: null });
+            setTimeout(() => {
+                dispatch({ type: "SET_GAMESTATE", payload: null });
+            }, 500);
         }
 
         if (level === 0)
@@ -95,7 +93,6 @@ export default function Home() {
             levelString = "medium";
         else if (level === 2)
             levelString = "hard";
-
 
         if (prompt !== problems[index][levelString].question &&
             answerWord !== problems[index][levelString].answer) {
@@ -107,13 +104,17 @@ export default function Home() {
                 }
             });
         }
-    }, [day, dispatch, level, language, prompt, answerWord]);
+    }, [day, level, language, prompt, answerWord]);
 
     useEffect(() => {
-        if (gameState !== null)
-            setTimeout(() => {
+        if (gameState === null)
+            setEndModalIsOpen(false);
+        setTimeout(() => {
+            if (gameState !== null)
                 setEndModalIsOpen(true);
-            }, 2500);
+            else
+                setEndModalIsOpen(false);
+        }, 2500);
     }, [gameState]);
 
     const preferredColorScheme = useColorScheme();
@@ -148,8 +149,6 @@ export default function Home() {
                     type="text"
                     className={styles.hiddenInput}
                 />
-                {/* Hack for getting Netlify to see the form */}
-                <Survey hidden />
                 <Script
                     src="https://www.googletagmanager.com/gtag/js?id=G-X66M623B3H"
                     strategy="afterInteractive"

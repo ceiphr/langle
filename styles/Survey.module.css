@@ -1,7 +1,7 @@
-.form > div {
-    margin-bottom: 15px;
+.title {
+    margin-bottom: 0;
 }
 
-.hidden {
-    display: none;
+.subtitle {
+    margin-top: 0;
 }

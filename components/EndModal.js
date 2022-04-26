@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal, Button } from '@mantine/core';
 import Survey from '@components/Survey';
@@ -14,7 +14,7 @@ const EndModal = ({ isOpen, setIsOpen }) => {
         dispatch({ type: "NEXT_LEVEL" });
         setTimeout(() => {
             dispatch({ type: "SET_GAMESTATE", payload: null });
-        }, 200);
+        }, 500);
     };
 
     return (
@@ -23,7 +23,7 @@ const EndModal = ({ isOpen, setIsOpen }) => {
             onClose={() => setIsOpen(false)}
         >
             <div className="center">
-                <h1>You {gameState ? "win" : "lose"}!</h1>
+                <h1>You {gameState === true ? "win" : gameState === false ? "lose" : "____"}!</h1>
                 {gameState === false && (<strong>The answer was &quot;{answerWord.toLowerCase()}.&quot;</strong>)}
                 {level === 2 ? <p>You&apos;ve completed all levels for today!<br />Come back tomorrow!</p> :
                     <>
