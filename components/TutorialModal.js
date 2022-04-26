@@ -55,13 +55,14 @@ const TutorialModal = ({ isOpen, setIsOpen }) => {
                 })}
             </div>
             <p>The letter <strong>U</strong> is not in the word. The letter <strong>A</strong> is in the word, but in the wrong spot.</p>
-            <hr />
+            <Button onClick={() => setIsOpen(false)}>Got it!</Button>
+            {/* <hr />
             <p>Choose your language:</p>
             <div className={styles.gridRow}>
                 <Button className={styles.button} onClick={() => handleLanguageChange("spanish")}>Spanish</Button>
                 <Button onClick={() => handleLanguageChange("french")}>French</Button>
             </div>
-            <p>You can change your language at any time from the navigation bar.</p>
+            <p>You can change your language at any time from the navigation bar.</p> */}
         </Modal>
     );
 };

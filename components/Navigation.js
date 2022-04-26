@@ -56,7 +56,7 @@ const Navigation = () => {
                         checked={currentTheme === 'dark'}
                         onChange={() => updateTheme()}
                     />
-                    <SegmentedControl
+                    {/* <SegmentedControl
                         className={styles.segmentedControl}
                         data={[
                             { label: 'Spanish', value: 'spanish' },
@@ -64,7 +64,7 @@ const Navigation = () => {
                         ]}
                         value={language}
                         onChange={(value) => updateLanguage(value)}
-                    />
+                    /> */}
                 </div>
             </div>
             <Modal opened={modalOpen} onClose={() => setModalOpen(false)} title="Warning:">
