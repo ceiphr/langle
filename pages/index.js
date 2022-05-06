@@ -143,6 +143,7 @@ export default function Home() {
                 <EndModal isOpen={endModalIsOpen} setIsOpen={setEndModalIsOpen} />
                 {/* Hidden input used to take input from physical keyboard */}
                 <input
+                    aria-hidden="true"
                     id="word-input"
                     inputMode="none"
                     onKeyDown={handleKeyDown}
