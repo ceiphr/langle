@@ -1,32 +1,33 @@
 {
-  "name": "langle",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@mantine/core": "^4.1.5",
-    "@mantine/form": "^4.1.5",
-    "@mantine/hooks": "^4.1.5",
-    "@mantine/modals": "^4.1.5",
-    "@mantine/next": "^4.1.5",
-    "animejs": "^3.2.1",
-    "next": "12.1.4",
-    "next-persist": "^1.2.4",
-    "react": "18.0.0",
-    "react-dom": "18.0.0",
-    "react-modal": "^3.14.4",
-    "react-redux": "^8.0.1",
-    "redux": "^4.2.0",
-    "redux-persist": "^6.0.0",
-    "tabler-icons-react": "^1.46.0"
-  },
-  "devDependencies": {
-    "eslint": "8.12.0",
-    "eslint-config-next": "12.1.4"
-  }
+    "name": "langle",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "export": "next export"
+    },
+    "dependencies": {
+        "@mantine/core": "^4.1.5",
+        "@mantine/form": "^4.1.5",
+        "@mantine/hooks": "^4.1.5",
+        "@mantine/modals": "^4.1.5",
+        "@mantine/next": "^4.1.5",
+        "animejs": "^3.2.1",
+        "next": "12.1.4",
+        "next-persist": "^1.2.4",
+        "react": "18.0.0",
+        "react-dom": "18.0.0",
+        "react-modal": "^3.14.4",
+        "react-redux": "^8.0.1",
+        "redux": "^4.2.0",
+        "redux-persist": "^6.0.0",
+        "tabler-icons-react": "^1.46.0"
+    },
+    "devDependencies": {
+        "eslint": "8.12.0",
+        "eslint-config-next": "12.1.4"
+    }
 }
